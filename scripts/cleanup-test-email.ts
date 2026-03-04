@@ -27,7 +27,7 @@ function loadEnvFile(filePath: string) {
 loadEnvFile(resolve(scriptDir, '../.env.production.local'));
 loadEnvFile(resolve(scriptDir, '../.env.local'));
 
-const EMAIL = 'danja0411@googlemail.com';
+const EMAIL = 'test@example.com';
 const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
 
 async function main() {

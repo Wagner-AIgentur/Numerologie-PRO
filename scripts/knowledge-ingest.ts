@@ -202,7 +202,8 @@ async function upsertToPinecone(
 
 // ── Supabase (direct Postgres via pg) ──────────────────────────────
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres.cyjxsgrtcllckgmqchwe:N^XEBo68xNrb67$P@26X@aws-1-eu-west-1.pooler.supabase.com:5432/postgres';
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) throw new Error('DATABASE_URL env var required');
 
 let pgClient: any = null;
 async function getPgClient() {

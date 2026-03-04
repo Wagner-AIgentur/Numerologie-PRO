@@ -85,7 +85,7 @@ WHERE crm_status = 'admin';
 -- Auth-User: E-Mail + Passwort setzen
 UPDATE auth.users
 SET email = 'info@numerologie-pro.com',
-    encrypted_password = crypt('RStXMe$&qGeC65', gen_salt('bf')),
+    encrypted_password = crypt('YOUR_ADMIN_PASSWORD', gen_salt('bf')),
     email_confirmed_at = COALESCE(email_confirmed_at, NOW()),
     raw_user_meta_data = COALESCE(raw_user_meta_data, '{}'::jsonb) || '{"email": "info@numerologie-pro.com"}'::jsonb,
     updated_at = NOW()

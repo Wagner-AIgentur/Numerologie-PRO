@@ -24,7 +24,7 @@ loadEnvFile(resolve(scriptDir, '../.env.production.local'));
 loadEnvFile(resolve(scriptDir, '../.env.local'));
 
 const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
-const EMAIL = 'danja0411@googlemail.com';
+const EMAIL = 'test@example.com';
 
 async function main() {
   console.log(`\n🔍 Checking auth status for: ${EMAIL}\n`);

@@ -16,7 +16,7 @@ const supabase = createClient(
   { auth: { autoRefreshToken: false, persistSession: false } }
 );
 
-const EMAIL = 'danja0411@gmail.com';
+const EMAIL = 'test@example.com';
 
 async function cleanup() {
   console.log(`\n🧹 Cleaning up all data for: ${EMAIL}\n`);

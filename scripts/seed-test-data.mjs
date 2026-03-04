@@ -8,12 +8,12 @@
 import pg from 'pg';
 const { Client } = pg;
 
+if (!process.env.DATABASE_URL) {
+  console.error('DATABASE_URL env var required');
+  process.exit(1);
+}
 const client = new Client({
-  host: 'db.cyjxsgrtcllckgmqchwe.supabase.co',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres',
-  password: 'N^XEBo68xNrb67$P@26X',
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
 });
 
@@ -192,7 +192,7 @@ async function main() {
   const deliv1 = await client.query(delivInsertSQL, [
     profile.id, null,
     'Numerologische Analyse — PDF',
-    'https://cyjxsgrtcllckgmqchwe.supabase.co/storage/v1/object/public/pdfs/test-numerologie-analyse.pdf',
+    'https://YOUR_PROJECT_REF.supabase.co/storage/v1/object/public/pdfs/test-numerologie-analyse.pdf',
     'pdf',
   ]);
 
@@ -206,7 +206,7 @@ async function main() {
   const deliv3 = await client.query(delivInsertSQL, [
     profile.id, null,
     'Karmische Analyse — Geburtstagscode',
-    'https://cyjxsgrtcllckgmqchwe.supabase.co/storage/v1/object/public/pdfs/test-karmic-birthday-code.pdf',
+    'https://YOUR_PROJECT_REF.supabase.co/storage/v1/object/public/pdfs/test-karmic-birthday-code.pdf',
     'pdf',
   ]);
 

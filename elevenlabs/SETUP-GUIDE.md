@@ -90,7 +90,7 @@ Main Agent (Lisa) — begruesst, klassifiziert und leitet direkt weiter
   |-- Anliegen = PAKETBERATUNG     --> Subagent: Paketberatung
   |-- Anliegen = FAQ UND ALLGEMEIN --> Subagent: FAQ
   |-- Anliegen = ACCOUNT UND SUPPORT --> Subagent: Support
-  |-- Anliegen = NOTFALL/ESKALATION  --> Telefon: +49 1511 8743759
+  |-- Anliegen = NOTFALL/ESKALATION  --> Telefon: +49 XXX XXXXXXX
 ```
 
 > **Kein separater Qualifier mehr!** Der Main Agent uebernimmt die Klassifizierung direkt (seit Commit 8e2755c).

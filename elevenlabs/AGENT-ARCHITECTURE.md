@@ -34,8 +34,8 @@
 │ Paketberat.│ │ FAQ/Allgem.│ │ Account/   │  │ WEITERLEI │
 │            │ │            │ │ Support    │  │ TUNG      │
 │ Pakete     │ │ Psycho-    │ │ Login      │  │           │
-│ Preise     │ │ matrix     │ │ Zahlung    │  │ +49 1511  │
-│ Buchung    │ │ Swetlana   │ │ Dashboard  │  │ 8743759   │
+│ Preise     │ │ matrix     │ │ Zahlung    │  │ +49 XXX  │
+│ Buchung    │ │ Swetlana   │ │ Dashboard  │  │ XXXXXXX   │
 └─────┬──────┘ └─────┬──────┘ └─────┬──────┘  │ (Admin)   │
       │              │              │          └───────────┘
       └──────────────┼──────────────┘
@@ -81,7 +81,7 @@
 | F1 | Main Agent | Paketberatung | `route_paketberatung` | Preis, Paket, buchen, Empfehlung, Kosten, Beziehungskarte, Lebenskarte, Jahresprognose, Geldkanal, Persoenliches Wachstum, Bestimmung, Mein Kind, PDF-Analyse, Erstgespraech, Budget |
 | F2 | Main Agent | FAQ | `route_faq` | was ist, wie funktioniert, wer ist, Psychomatrix, Numerologie, Pythagoras, Rechner, Swetlana, wissenschaftlich, Kompatibilitaet, Telegram Bot, erklaeren, informieren |
 | F3 | Main Agent | Account/Support | `route_support` | Login, Passwort, Konto, Zahlung, Stornierung, Dashboard, PDF herunterladen, Fehler, funktioniert nicht, Empfehlungscode, Support, Hilfe |
-| F4 | Main Agent | **Telefon: +49 1511 8743759** | `route_eskalation` | Mensch, echte Person, Vorgesetzter, Manager, Beschwerde, Anwalt, Klage, unzufrieden, Frechheit, sofort jemand, will nicht mit KI, verbinde mich, Notfall, dringend, inakzeptabel |
+| F4 | Main Agent | **Telefon: +49 XXX XXXXXXX** | `route_eskalation` | Mensch, echte Person, Vorgesetzter, Manager, Beschwerde, Anwalt, Klage, unzufrieden, Frechheit, sofort jemand, will nicht mit KI, verbinde mich, Notfall, dringend, inakzeptabel |
 
 ### Backward Conditions
 
@@ -94,7 +94,7 @@
 | B5 | FAQ | Main Agent | `eskalation` | Anrufer verlangt Menschen, ist veraergert, droht |
 | B6 | Account/Support | Main Agent | `eskalation` | Anrufer verlangt Menschen, ist veraergert, droht |
 
-> **Eskalations-Pfad:** Sub-Agent erkennt Eskalation → Backward zum Main Agent → Main Agent erkennt NOTFALL → Forward F4 → Telefon-Weiterleitung an **+49 1511 8743759** (IT Admin)
+> **Eskalations-Pfad:** Sub-Agent erkennt Eskalation → Backward zum Main Agent → Main Agent erkennt NOTFALL → Forward F4 → Telefon-Weiterleitung an **+49 XXX XXXXXXX** (IT Admin)
 
 ---
 
@@ -291,7 +291,7 @@ Der Main Agent klassifiziert das Anliegen direkt in eine von 4 Kategorien und le
 | F1 | Main Agent | Paketberatung | `route_paketberatung` | Preis/Paket/Buchung/Empfehlung |
 | F2 | Main Agent | FAQ | `route_faq` | Psychomatrix/Swetlana/Rechner/Info |
 | F3 | Main Agent | Account/Support | `route_support` | Login/Zahlung/Dashboard/Problem |
-| F4 | Main Agent | **Tel: +49 1511 8743759** | `route_eskalation` | Mensch/Beschwerde/Anwalt/Notfall |
+| F4 | Main Agent | **Tel: +49 XXX XXXXXXX** | `route_eskalation` | Mensch/Beschwerde/Anwalt/Notfall |
 
 ### Backward (zurueck)
 
@@ -310,7 +310,7 @@ Der Main Agent klassifiziert das Anliegen direkt in eine von 4 Kategorien und le
 Sub-Agent erkennt Eskalation
   → Backward zum Main Agent
     → Main Agent erkennt NOTFALL
-      → Forward F4: Telefon-Weiterleitung an +49 1511 8743759 (IT Admin)
+      → Forward F4: Telefon-Weiterleitung an +49 XXX XXXXXXX (IT Admin)
 ```
 
 ## Tool-Verteilung

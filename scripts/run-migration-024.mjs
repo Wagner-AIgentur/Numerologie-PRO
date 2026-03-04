@@ -22,7 +22,7 @@ const sql = readFileSync('supabase/migrations/024_page_views.sql', 'utf8');
 // Use pg directly for migration
 const { default: pg } = await import('pg');
 const client = new pg.Client({
-  connectionString: 'postgresql://postgres.cyjxsgrtcllckgmqchwe:N^XEBo68xNrb67$P@26X@aws-1-eu-west-1.pooler.supabase.com:5432/postgres',
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
 });
 

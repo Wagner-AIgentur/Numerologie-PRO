@@ -58,7 +58,7 @@ loadEnvFile(resolve(scriptDir, '../.env.production.local'));
 loadEnvFile(resolve(scriptDir, '../.env.local'));
 
 // ─── Config ───
-const TEST_EMAIL = 'danja0411@googlemail.com';
+const TEST_EMAIL = 'test@example.com';
 const TEST_BIRTHDATE = '04.11.1990'; // DD.MM.YYYY
 const LOCALE = 'de';
 

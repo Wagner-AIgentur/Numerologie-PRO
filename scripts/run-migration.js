@@ -2,7 +2,7 @@ const { Client } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-const connectionString = 'postgresql://postgres.cyjxsgrtcllckgmqchwe:N^XEBo68xNrb67$P@26X@aws-1-eu-west-1.pooler.supabase.com:5432/postgres';
+const connectionString = process.env.DATABASE_URL;
 
 async function runMigration() {
     const client = new Client({
