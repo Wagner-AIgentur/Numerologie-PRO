@@ -1,0 +1,136 @@
+{
+  "name": "Numerologie PRO — Post-Purchase Upsell (2 Tage)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stripe-upsell",
+        "responseMode": "responseNode"
+      },
+      "id": "webhook-trigger",
+      "name": "Stripe Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const event = $input.first().json.body;\nif (event.type !== 'checkout.session.completed') {\n  return [];\n}\nconst session = event.data.object;\nreturn [{\n  json: {\n    email: session.customer_email,\n    packageKey: session.metadata?.package_key ?? 'unknown',\n    locale: session.metadata?.locale ?? 'de',\n    profileId: session.metadata?.profile_id ?? null\n  }\n}];"
+      },
+      "id": "parse-event",
+      "name": "Event parsen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "days"
+      },
+      "id": "wait-2-days",
+      "name": "2 Tage warten",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.numerologie-pro.com/api/n8n/profile-lookup",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.CRON_SECRET}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ profile_id: $('Event parsen').first().json.profileId }) }}"
+      },
+      "id": "check-telegram",
+      "name": "Profil + Telegram prüfen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "telegram-check",
+              "leftValue": "={{ $json[0]?.telegram_chat_id }}",
+              "rightValue": "",
+              "operator": { "type": "number", "operation": "exists" }
+            }
+          ]
+        }
+      },
+      "id": "has-telegram",
+      "name": "Hat Telegram?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $('Profil + Telegram prüfen').first().json[0].telegram_chat_id, text: $('Event parsen').first().json.locale === 'de' ? '🌟 <b>Exklusives Angebot für dich!</b>\\n\\nDanke für deine Buchung! Als Dankeschön erhältst du <b>10% Rabatt</b> auf ein ergänzendes Paket.\\n\\nDieses Angebot gilt nur 48 Stunden!\\n\\n👉 https://numerologie-pro.com/de/pakete' : '🌟 <b>Эксклюзивное предложение для тебя!</b>\\n\\nСпасибо за покупку! В благодарность ты получаешь <b>скидку 10%</b> на дополнительный пакет.\\n\\nПредложение действует 48 часов!\\n\\n👉 https://numerologie-pro.com/ru/pakete', parse_mode: 'HTML' }) }}"
+      },
+      "id": "send-upsell",
+      "name": "Upsell per Telegram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems"
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [660, 500]
+    }
+  ],
+  "connections": {
+    "Stripe Webhook Trigger": {
+      "main": [[{ "node": "Event parsen", "type": "main", "index": 0 }]]
+    },
+    "Event parsen": {
+      "main": [
+        [
+          { "node": "2 Tage warten", "type": "main", "index": 0 },
+          { "node": "Respond OK", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "2 Tage warten": {
+      "main": [[{ "node": "Profil + Telegram prüfen", "type": "main", "index": 0 }]]
+    },
+    "Profil + Telegram prüfen": {
+      "main": [[{ "node": "Hat Telegram?", "type": "main", "index": 0 }]]
+    },
+    "Hat Telegram?": {
+      "main": [
+        [{ "node": "Upsell per Telegram", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [{ "name": "Numerologie PRO" }, { "name": "Telegram" }, { "name": "Upsell" }]
+}

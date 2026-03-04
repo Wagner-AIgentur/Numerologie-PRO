@@ -1,0 +1,518 @@
+{
+  "meta": {
+    "title": "Numerologie PRO | Swetlana Wagner",
+    "description": "Entdecke deine Psychomatrix - Pythagoras Numerologie Beratung"
+  },
+  "nav": {
+    "home": "Startseite",
+    "calculator": "Matrix-Rechner",
+    "packages": "Pakete",
+    "about": "Über mich",
+    "contact": "Kontakt",
+    "blog": "Blog",
+    "certificates": "Zertifikate",
+    "freeConsultation": "Kostenlose Beratung"
+  },
+  "hero": {
+    "badge": "Pythagoras Psychomatrix · 500+ Beratungen",
+    "headline": "Entdecke deine Psychomatrix",
+    "accentLine": "Lebe deine Bestimmung",
+    "subtitle": "Stehst du an einem Wendepunkt – in der Beziehung, im Beruf oder auf der Suche nach deiner Bestimmung? Die Psychomatrix gibt dir klare Antworten – fundierte Persönlichkeitsanalyse, keine Wahrsagerei.",
+    "ctaPrimary": "Matrix berechnen",
+    "ctaSecondary": "Kostenlose Beratung"
+  },
+  "calculator": {
+    "sectionTitle": "Berechne deine",
+    "sectionTitleAccent": "Schicksalszahl",
+    "sectionSubtitle": "Kostenlos · In 30 Sekunden · Ohne Anmeldung",
+    "chips": [
+      "Kostenlos",
+      "Sofort",
+      "Ohne Anmeldung"
+    ],
+    "placeholder": "Geburtsdatum eingeben",
+    "button": "Jetzt berechnen",
+    "label": "Dein Geburtsdatum",
+    "day": "Tag",
+    "month": "Monat",
+    "year": "Jahr",
+    "calculate": "Matrix berechnen",
+    "yourMatrix": "Deine Psychomatrix",
+    "unlock": "Vollständige Analyse freischalten",
+    "unlockDesc": "Gib deine E-Mail-Adresse ein, um alle 9 Positionen und die Linien-Analyse deiner Matrix zu sehen.",
+    "emailPlaceholder": "Deine E-Mail-Adresse",
+    "unlockButton": "Kostenlos freischalten",
+    "privacy": "Wir respektieren deine Privatsphäre. Kein Spam."
+  },
+  "matrixLines": {
+    "rows": "Ebenen",
+    "cols": "Säulen",
+    "diagonals": "Diagonalen",
+    "row1": "Zielstrebigkeit",
+    "row2": "Familienqualität",
+    "row3": "Stabilität",
+    "col1": "Selbstwert",
+    "col2": "Arbeit & Geld",
+    "col3": "Talent",
+    "diagDown": "Spiritualität",
+    "diagUp": "Temperament",
+    "digits": "Ziffern"
+  },
+  "positions": {
+    "1": {
+      "name": "Charakter",
+      "desc": "Willenskraft & Ego"
+    },
+    "2": {
+      "name": "Energie",
+      "desc": "Bioenergie & Vitalität"
+    },
+    "3": {
+      "name": "Kreativität",
+      "desc": "Interessen & Talent"
+    },
+    "4": {
+      "name": "Gesundheit",
+      "desc": "Körper & Stabilität"
+    },
+    "5": {
+      "name": "Logik",
+      "desc": "Denken & Intuition"
+    },
+    "6": {
+      "name": "Arbeit",
+      "desc": "Handwerk & Fleiß"
+    },
+    "7": {
+      "name": "Glück",
+      "desc": "Schicksal & Chance"
+    },
+    "8": {
+      "name": "Pflicht",
+      "desc": "Verantwortung & Güte"
+    },
+    "9": {
+      "name": "Intelligenz",
+      "desc": "Gedächtnis & Verstand"
+    }
+  },
+  "howItWorks": {
+    "heading": "So funktioniert's",
+    "subtitle": "In drei einfachen Schritten zu deiner persönlichen Matrix-Analyse.",
+    "step1": {
+      "title": "Geburtsdatum eingeben",
+      "description": "Gib einfach dein Geburtsdatum ein - mehr brauchen wir nicht."
+    },
+    "step2": {
+      "title": "Matrix erhalten",
+      "description": "Deine persönliche Psychomatrix wird sofort berechnet."
+    },
+    "step3": {
+      "title": "Beratung buchen",
+      "description": "Erfahre in einem Live-Reading die tiefere Bedeutung deiner Matrix."
+    }
+  },
+  "packages": {
+    "sectionTitle": "Numerologie-Beratung",
+    "sectionTitleAccent": "Pakete & Preise",
+    "sectionSubtitle": "Wähle das Paket, das zu deiner Lebenssituation passt. Jedes Reading ist individuell und persönlich - per Zoom oder Telegram.",
+    "duration": "90-120 Min.",
+    "includes": "Inklusive",
+    "book": "Jetzt buchen",
+    "popular": "Beliebt",
+    "tabInfo": "Info",
+    "tabFeatures": "Leistungen",
+    "tabResults": "Ergebnisse",
+    "withoutPdf": "Konsultation",
+    "withPdf": "+ PDF-Prognose",
+    "viewAll": "Alle Pakete ansehen",
+    "freeCtaTitle": "Kostenlose",
+    "freeCtaTitleAccent": "Erstberatung",
+    "freeCtaSubtitle": "Sichere dir jetzt deine kostenlose Beratung\nund erfahre, was deine Zahlen verraten!",
+    "freeCtaButton": "Kostenlos buchen",
+    "beziehungskarte": {
+      "title": "Beziehungskarte",
+      "subtitle": "Partnerschaft & Liebe",
+      "forWhom": "Für Paare & Menschen in Beziehungsfragen",
+      "desc": "Geburtsdatum-Analyse für tiefes Verständnis eurer Beziehung: Paardynamik, Kompatibilität, Lektionen und das wahre Ziel eurer Verbindung.",
+      "price": "119€",
+      "duration": "1,5–2 Stunden",
+      "featuresTitle": "Das erfahren Sie:",
+      "features": ["Charaktereigenschaften der Partner und deren Einfluss auf die Beziehung", "Kompatibilität nach Energie und Interessen", "Problemzonen und Wege zur Konfliktlösung", "Krisenperioden und ihre Aufgaben", "Der Wert Ihres Partners und seine Rolle in Ihrem Leben", "Das Ziel Ihrer Verbindung und die Aufgaben der Ehe"],
+      "resultsTitle": "Im Ergebnis verstehen Sie:",
+      "results": ["Wie Sie die Beziehung unter Berücksichtigung der Besonderheiten des anderen aufbauen", "Was die Verbindung stärkt und die Beziehung verbessert", "Welche Lektionen Sie gemeinsam durchlaufen", "Wie Sie Harmonie und Bewusstsein in der Partnerschaft bewahren"]
+    },
+    "bestimmung": {
+      "title": "Bestimmung",
+      "subtitle": "Lebensweg & Beruf",
+      "forWhom": "Für Menschen in Sinnkrisen & auf Berufsuche",
+      "desc": "Verstehen Sie Ihre Individualität, Aufgaben, Führungsqualitäten und Berufe, durch die Sie sich verwirklichen.",
+      "price": "149€",
+      "duration": "2 Stunden",
+      "featuresTitle": "Was wir analysieren:",
+      "features": ["Individualität", "Wofür Sie hier sind", "Durch welche Werte Sie sich verwirklichen", "Führungsqualitäten", "Berufe und Tätigkeitsfelder", "Blockaden und Hindernisse", "Anzeichen von Burnout", "Wie Sie in Ihre Ressource kommen"],
+      "resultsTitle": "Im Ergebnis werden Sie:",
+      "results": ["Ihre Stärken und Einzigartigkeit kennen", "Verstehen, wodurch Sie sich verwirklichen", "Empfehlungen für die Zielerreichung erhalten"]
+    },
+    "wachstum": {
+      "title": "Persönliches Wachstum — Anleitung zu sich selbst",
+      "subtitle": "Persönliche Entwicklung",
+      "forWhom": "Für Menschen, die sich weiterentwickeln wollen",
+      "desc": "Geburtsdatum-Analyse zum Verständnis der eigenen Persönlichkeit. Fokus auf Hauptressourcen, angeborene Individualität und Ressourcen der Herkunft.",
+      "price": "99€",
+      "duration": "1,5–2 Stunden",
+      "featuresTitle": "Das erfahren Sie:",
+      "features": ["Stärken und Schwächen des Charakters, individuelle Ressourcen", "Gewohnheiten und deren Einfluss", "Arbeitsneigung und Zielstrebigkeit", "Logisches Denken, Temperament, Kommunikation", "Lebensaufgaben und spirituelles Potenzial", "Interessensbereiche"],
+      "resultsTitle": "Im Ergebnis werden Sie:",
+      "results": ["Verstehen, worin Ihre Stärke und Einzigartigkeit liegt", "Wissen, welche inneren Ressourcen von Geburt an gegeben sind", "Blockaden und Einschränkungen erkennen, die die Entwicklung hemmen", "Orientierung erhalten, wie Sie Ihre Stärken nutzen", "Eine Handlungsstrategie auf Basis natürlicher Ressourcen aufbauen können"]
+    },
+    "meinKind": {
+      "title": "Mein Kind",
+      "subtitle": "Kindermatrix",
+      "forWhom": "Für Eltern, die ihr Kind besser verstehen wollen",
+      "desc": "Geburtsdatum-Analyse des Kindes zum Verständnis seiner Talente, seines Charakters und seiner Fähigkeiten.",
+      "price": "99€",
+      "duration": "1,5–2 Stunden",
+      "featuresTitle": "Was wir analysieren:",
+      "features": ["Talente und Stärken des Kindes", "Charaktereigenschaften und Denktyp", "Wie das Kind die Welt wahrnimmt", "Interessen und Neigungen", "Aktuelle Entwicklungsphase und Aufgaben", "Selbstwertgefühl und Zielstrebigkeit", "Tätigkeitsbereiche, in denen das Kind sich entfalten kann"],
+      "resultsTitle": "Im Ergebnis erfahren Sie:",
+      "results": ["Wie Sie die Talente des Kindes am besten fördern", "Welche Aufgaben und Fähigkeiten jetzt wichtig sind", "Wie Sie seine Emotionen und Reaktionen verstehen", "Wie Sie dem Kind helfen, sich harmonisch zu entwickeln", "Orientierung für Hobbys, Kurse und Bildung"]
+    },
+    "geldkanal": {
+      "title": "Geldkanal",
+      "subtitle": "Finanzielles Potenzial",
+      "forWhom": "Für Menschen, die ihr Einkommen steigern wollen",
+      "desc": "Geburtsdatum-Analyse zum Verständnis Ihres finanziellen Potenzials.",
+      "price": "99€",
+      "duration": "1,5–2 Stunden",
+      "featuresTitle": "Das erfahren Sie:",
+      "features": ["Welche Eigenschaften das Einkommen verstärken", "Berufe, die den Geldfluss öffnen", "Was die Geldenergie blockiert", "Welche Handlungen das Einkommen steigern", "Die aktuelle Periode und wie Sie sie nutzen"],
+      "resultsTitle": "Im Ergebnis verstehen Sie:",
+      "results": ["Wie Sie Ihr finanzielles Potenzial entfalten", "Welche Gewohnheiten und Handlungen das Einkommen steigern", "Wie Sie die aktuelle Periode für maximale Effizienz nutzen", "Wodurch die Geldströme in Ihrem Leben fließen"]
+    },
+    "jahresprognose": {
+      "title": "Jahresprognose",
+      "subtitle": "Individueller Jahresüberblick",
+      "forWhom": "Für alle, die ihr Jahr bewusst gestalten wollen",
+      "desc": "Analyse des kommenden Jahres: Aufgaben, Lektionen und Ressourcen zur Verwirklichung Ihrer Ziele.",
+      "price": "119€",
+      "pricePdf": "179€",
+      "duration": "1–2 Stunden",
+      "featuresTitle": "Sie erfahren:",
+      "features": ["Wie Ihr kommendes Jahr in den Bereichen Verwirklichung, Finanzen, Beziehungen und Gesundheit aussieht", "Worin die Kraft des Jahres und des Monats liegt", "Welche günstigen Möglichkeiten das Jahr eröffnet", "Worauf Sie in diesem Jahr achten sollten", "Welche Aufgaben Sie erfüllen müssen", "Welche Handlungen bei der Lösung der Jahresaufgaben helfen", "Die Hauptlektion der Periode, in der Sie sich gerade befinden"],
+      "resultsTitle": "Im Ergebnis werden Sie:",
+      "results": ["Die Hauptaufgaben und Chancen des Jahres erkennen", "Ihre Handlungen im Einklang mit der Energie der Periode planen können", "Wissen, wie Sie die Stärken des Jahres für Ihre Ziele nutzen", "Klarheit darüber erhalten, was die aktuelle Periode Sie lehrt"]
+    },
+    "monatsprognose": {
+      "title": "Monatsprognose",
+      "subtitle": "Monatliche Energieanalyse",
+      "forWhom": "Für alle, die ihren Monat bewusst planen wollen",
+      "desc": "Monatsprognose zur Planung Ihrer Angelegenheiten im Einklang mit der Energie des Zeitraums.",
+      "price": "19€",
+      "duration": "Audio / Text",
+      "featuresTitle": "Sie erfahren:",
+      "features": ["Ihre persönliche Jahreszahl", "Die wichtigsten Aufgaben und Möglichkeiten", "Worauf Sie in diesem Zeitraum Ihre Aufmerksamkeit richten sollten", "Wie Sie Ihre Kräfte richtig einteilen"],
+      "resultsTitle": "",
+      "results": []
+    },
+    "tagesprognose": {
+      "title": "Tagesprognose",
+      "subtitle": "Tägliche Empfehlungen",
+      "forWhom": "Für alle, die jeden Tag optimal nutzen wollen",
+      "desc": "Tagesprognose mit praktischen Empfehlungen für Ihren Tag.",
+      "price": "14€",
+      "duration": "Audio / Text",
+      "featuresTitle": "Sie erfahren:",
+      "features": ["Die Zahl des Tages und ihre Bedeutung", "Die wichtigsten Tendenzen des Tages", "Worauf Sie an diesem Tag Ihre Aufmerksamkeit richten sollten", "Was Sie vermeiden sollten"],
+      "resultsTitle": "",
+      "results": []
+    },
+    "lebenskarte": {
+      "title": "Lebenskarte – Basisanalyse",
+      "subtitle": "Karma-Matrix",
+      "forWhom": "Für alle, die ihre Lebensaufgaben verstehen wollen",
+      "desc": "Verstehen Sie, wie aktuelle Perioden, karmische Knoten und Lebensaufgaben Ihr Leben beeinflussen. Erhalten Sie praktische Empfehlungen zur Entfaltung Ihres Potenzials.",
+      "price": "79€",
+      "duration": "1,5–2 Stunden",
+      "featuresTitle": "Was wir analysieren:",
+      "features": ["Tag, Monat und Jahr der Geburt", "Aktuelle Lebensperioden", "Karmische Knoten und Prüfungen", "Blockaden und Hindernisse bei der Verwirklichung", "Mögliche Berufe und Talente", "Wege zur Selbstverwirklichung"],
+      "resultsTitle": "Im Ergebnis werden Sie:",
+      "results": ["Die wichtigsten Stützpunkte in Ihrem Leben kennen", "Ihre Stärken und Hindernisse sehen", "Empfehlungen zur Entfaltung Ihres Potenzials erhalten"]
+    }
+  },
+  "testimonials": {
+    "title": "Was meine Klienten",
+    "titleAccent": "sagen",
+    "items": [
+      {
+        "quote": "Vielen Dank für die Numerologie-Analyse 👍. Es war mein erstes Mal und ich bin überrascht, wie viel übereinstimmt. Es hat mich zum Nachdenken gebracht und jetzt weiß ich, woran ich arbeiten muss!",
+        "name": "Ljudmila .K",
+        "handle": "@ludmila_k",
+        "stars": 5,
+        "category": "Persönlichkeit"
+      },
+      {
+        "quote": "Swetlana, danke für die numerologische Analyse. Vieles ist jetzt klar geworden. Es hat mir Verständnis gegeben, warum bestimmte Dinge so passieren. Du machst eine tolle Arbeit ❤️👍",
+        "name": "Oksana .M",
+        "handle": "@oksana_m",
+        "stars": 5,
+        "category": "Persönlichkeit"
+      },
+      {
+        "quote": "Swetlana, danke für den ausführlichen Matrix-Überblick für mich, meinen Mann und die Kinder. Hätte nicht gedacht, dass man aus Zahlen so viel über einen Menschen erfahren kann. Ich werde dich weiterempfehlen.",
+        "name": "Valentina",
+        "handle": "@valentina",
+        "stars": 5,
+        "category": "Familie"
+      },
+      {
+        "quote": "Danke für die Beratung 🫶, sehr ausführlich wurden die persönlichen Qualitäten betrachtet und eine Richtung aufgezeigt. Danke für die Tipps, den Fokus zu halten, Erfolgstagebuch und kreativen Ansatz 🤝",
+        "name": "Natalja.G",
+        "handle": "@natalya_g",
+        "stars": 5,
+        "category": "Beruf"
+      },
+      {
+        "quote": "Die Beratung hat mir geholfen, eine Richtung in meiner Tätigkeit zu sehen, Ängste loszulassen und den Anstoß zum Handeln zu bekommen) Swetlana ist eine sehr kompetente Spezialistin 💓💓💓 lernt euch selbst kennen! 🙏",
+        "name": "Natalja.B",
+        "handle": "@natalya_b",
+        "stars": 5,
+        "category": "Beruf"
+      },
+      {
+        "quote": "Ich bin Swetlana sehr dankbar für die tiefgehende und detaillierte Analyse! Nach der Beratung haben sich viele Dinge für mich geklärt. Ich empfehle es jedem, der sich selbst besser verstehen möchte!",
+        "name": "Maria.O",
+        "handle": "@maria_o",
+        "stars": 5,
+        "category": "Persönlichkeit"
+      },
+      {
+        "quote": "Nach 15 Jahren Ehe haben wir endlich verstanden, warum wir so unterschiedlich ticken. Die Kompatibilitätsanalyse hat uns die Augen geöffnet – jetzt kommunizieren wir viel bewusster miteinander.",
+        "name": "Elena.W",
+        "handle": "@elena_w",
+        "stars": 5,
+        "category": "Beziehung"
+      },
+      {
+        "quote": "Ich war skeptisch, aber die Jahresprognose hat sich in vielen Punkten bestätigt. Besonders die Warnung vor dem Herbst – genau da kam die große Veränderung. Jetzt bestelle ich jedes Jahr eine neue 🙌",
+        "name": "Irina.S",
+        "handle": "@irina_s",
+        "stars": 5,
+        "category": "Jahresprognose"
+      },
+      {
+        "quote": "Swetlana hat mir geholfen zu verstehen, warum ich mich in meinem Job nie richtig gefühlt habe. Die Zahlen haben gezeigt, dass mein Potenzial ganz woanders liegt. Seitdem bin ich selbstständig – und glücklich 💛",
+        "name": "Tatjana.K",
+        "handle": "@tatjana_k",
+        "stars": 5,
+        "category": "Lebensweg"
+      },
+      {
+        "quote": "Meine Tochter hatte Schwierigkeiten in der Schule. Durch die Kindermatrix wussten wir plötzlich, welcher Lerntyp sie ist und wie wir sie unterstützen können. Ein ganz anderes Kind seitdem! Danke 🙏",
+        "name": "Anastasia.R",
+        "handle": "@anastasia_r",
+        "stars": 5,
+        "category": "Familie"
+      }
+    ]
+  },
+  "about": {
+    "badge": "Deine Numerologin",
+    "heading": "Über Swetlana",
+    "bio": "Seit über 10 Jahren begleite ich Menschen auf ihrem Weg zur Selbsterkenntnis. Die Pythagoras-Psychomatrix hat mir selbst geholfen, meine Bestimmung zu finden - und jetzt helfe ich dir.",
+    "cta": "Mehr erfahren"
+  },
+  "trust": {
+    "payment": {
+      "label": "Sichere Zahlung",
+      "description": "SSL-verschlüsselt via Stripe"
+    },
+    "dsgvo": {
+      "label": "DSGVO-konform",
+      "description": "Deine Daten sind geschützt"
+    },
+    "sessions": {
+      "label": "500+ Beratungen",
+      "description": "Zufriedene Klienten"
+    },
+    "languages": {
+      "label": "Konsultation auf Russisch",
+      "description": "PDF-Analysen auch auf Deutsch"
+    },
+    "personal": {
+      "label": "1:1 Live-Beratung",
+      "description": "Persönlich, keine KI"
+    },
+    "checkoutHint": "SSL-verschlüsselt · Sichere Zahlung via Stripe"
+  },
+  "cta": {
+    "heading": "Welche Antworten stecken in deiner Matrix?",
+    "subtitle": "Ob Beziehung, Beruf oder Selbstverwirklichung – deine Psychomatrix zeigt dir den Weg. Jetzt kostenlos berechnen.",
+    "button": "Jetzt Matrix berechnen"
+  },
+  "aboutPage": {
+    "title": "Über Swetlana Wagner",
+    "subtitle": "Deine Numerologin",
+    "intro": "Seit über 5 Jahren begleite ich Menschen auf ihrem Weg zur Selbsterkenntnis. Die Pythagoras-Psychomatrix hat mir geholfen, meine Bestimmung zu finden — und jetzt helfe ich dir, deine zu entdecken.",
+    "intro2": "Wir suchen oft nach Antworten im Außen, aber selten denken wir daran, dass alle Antworten bereits in uns stecken. Die Numerologie hilft dir, diesen inneren Kompass zu finden.",
+    "whyTitle": "Warum meine Beratungen helfen",
+    "why1Title": "Persönlicher Dialog",
+    "why1Desc": "Keine vorgefertigten Antworten — ich gehe individuell auf deine Situation ein, in einem echten, lebendigen Gespräch.",
+    "why2Title": "Individueller Ansatz",
+    "why2Desc": "Jede Beratung wird auf deine Ziele und deine aktuelle Lebenssituation abgestimmt.",
+    "why3Title": "Schnelle Ergebnisse",
+    "why3Desc": "Keine langwierige Therapie nötig — wir fokussieren uns auf das Wesentliche und finden Lösungen in 1-2 Sitzungen.",
+    "why4Title": "Expertise",
+    "why4Desc": "Über 5 Jahre Erfahrung in der Numerologie. Tiefgehende Analyse und professioneller Blick auf deine Situation.",
+    "why5Title": "Aufzeichnung inklusive",
+    "why5Desc": "Du erhältst eine Aufzeichnung der Beratung, um wichtige Erkenntnisse jederzeit nachlesen zu können.",
+    "why6Title": "Vertraulichkeit",
+    "why6Desc": "Ich speichere keine Aufzeichnungen dauerhaft und garantiere vollständige Privatsphäre deiner Informationen.",
+    "ctaTitle": "Bereit für deine persönliche Beratung?",
+    "ctaDesc": "Buche jetzt dein kostenloses 15-Minuten-Erstgespräch und erfahre, wie die Numerologie dir helfen kann.",
+    "ctaButton": "Kostenlose Beratung buchen",
+    "certificatesTitle": "Meine Qualifikationen",
+    "certificatesDesc": "Sieh dir meine Zertifikate und Ausbildungen in der Numerologie an.",
+    "certificatesLink": "Zu den Zertifikaten"
+  },
+  "kontakt": {
+    "title": "Kontakt & Terminbuchung",
+    "subtitle": "Deine Situation braucht einen individuellen Ansatz? Ich freue mich, von dir zu hören und das passende Beratungsformat für dich zu finden.",
+    "formTitle": "Schreib mir",
+    "name": "Name",
+    "namePlaceholder": "Dein Name",
+    "email": "E-Mail",
+    "emailPlaceholder": "Deine E-Mail-Adresse",
+    "phone": "Telefon (optional)",
+    "phonePlaceholder": "Deine Telefonnummer",
+    "topic": "Thema",
+    "topicPlaceholder": "Wähle ein Thema",
+    "topicBeziehungsmatrix": "Beziehungsmatrix — Partnerschaft & Kompatibilität",
+    "topicLebensbestimmung": "Lebensbestimmung — Berufung & Potenzial",
+    "topicWachstumsplan": "Wachstumsplan — Persönliche Entwicklung",
+    "topicMeinKind": "Mein Kind — Erziehung & Talente",
+    "topicGeldkanal": "Geldkanal — Finanzen & Wohlstand",
+    "topicJahresprognose": "Jahresprognose — Planung & Ausblick",
+    "topicLebenskarte": "Lebenskarte — Basisanalyse",
+    "topicPdfAnalyse": "PDF-Analyse — Psychomatrix",
+    "topicFreeConsultation": "Kostenlose Erstberatung",
+    "topicOther": "Sonstiges",
+    "message": "Nachricht",
+    "messagePlaceholder": "Beschreibe deine Situation...",
+    "send": "Nachricht senden",
+    "orEmail": "Oder schreibe direkt an:",
+    "orCall": "Oder ruf an:",
+    "directContact": "Direkter Kontakt",
+    "bookingTitle": "Kostenlose Beratung",
+    "bookingDesc": "Buche direkt einen Termin für ein kostenloses 15-20 Minuten Erstgespräch per Zoom oder Telegram.",
+    "bookingButton": "Termin buchen"
+  },
+  "faq": {
+    "title": "Häufig gestellte",
+    "titleAccent": "Fragen",
+    "subtitle": "Alles, was du über die Numerologie-Beratung wissen musst.",
+    "q1": "Was ist die Pythagoras-Psychomatrix?",
+    "a1": "Die Psychomatrix ist ein System der Numerologie, das auf dem Geburtsdatum basiert. Sie zeigt deine Persönlichkeitsstruktur in einem 3x3 Raster - mit 9 Positionen, die Charakter, Energie, Kreativität, Gesundheit, Logik, Arbeit, Glück, Pflicht und Intelligenz abbilden.",
+    "q2": "Wie läuft eine Beratung ab?",
+    "a2": "Die Beratung findet per Zoom oder Telegram auf Russisch statt und dauert je nach Paket 90-120 Minuten. Ich berechne deine Matrix, erkläre dir alle Positionen und Linien und beantworte deine persönlichen Fragen. Auf Wunsch erhältst du eine PDF-Zusammenfassung — auch auf Deutsch verfügbar.",
+    "q3": "Brauche ich Vorkenntnisse in Numerologie?",
+    "a3": "Nein, gar nicht! Ich erkläre dir alles verständlich und Schritt für Schritt. Die Beratung ist auch für komplette Einsteiger geeignet.",
+    "q4": "Wie genau ist die Numerologie?",
+    "a4": "Die Psychomatrix ist ein Werkzeug zur Selbstreflexion und Potenzialanalyse - keine exakte Wissenschaft. Viele Klienten sind überrascht, wie treffend die Beschreibungen ihre Persönlichkeit widerspiegeln.",
+    "q5": "In welcher Sprache finden die Beratungen statt?",
+    "a5": "Alle Live-Beratungen finden auf Russisch statt. PDF-Analysen und schriftliche Zusammenfassungen können auf Wunsch auch auf Deutsch erstellt werden.",
+    "q6": "Was kostet eine Beratung?",
+    "a6": "Die Preise variieren je nach Paket — von Kurzanalysen bis zu umfangreichen Beratungspaketen. Alle Pakete und Preise findest du auf der Pakete-Seite. Die kostenlose Erstberatung (15-20 Min.) ist unverbindlich.",
+    "q7": "Ist meine persönliche Information geschützt?",
+    "a7": "Absolut. Alle Daten werden DSGVO-konform verarbeitet. Beratungsaufzeichnungen werden nicht dauerhaft gespeichert und deine Informationen werden niemals an Dritte weitergegeben.",
+    "q8": "Kann ich die Beratung auch verschenken?",
+    "a8": "Ja! Eine Numerologie-Beratung ist ein wundervolles Geschenk. Kontaktiere mich einfach und ich erstelle dir einen personalisierten Geschenk-Gutschein."
+  },
+  "certificates": {
+    "badge": "Qualifikationen",
+    "title": "Meine Zertifikate",
+    "subtitle": "Kontinuierliche Weiterbildung und Verbesserung sind die Grundlage meines beruflichen Weges. Hier sind meine Zertifikate und Diplome, die meine Qualifikation in Numerologie und Psychologie bestätigen.",
+    "items": [
+      { "image": "/images/certificates/cert-1.jpg", "alt": "Numerologie Zertifikat 1" },
+      { "image": "/images/certificates/cert-2.jpg", "alt": "Numerologie Zertifikat 2" },
+      { "image": "/images/certificates/cert-3.jpg", "alt": "Numerologie Zertifikat 3" },
+      { "image": "/images/certificates/cert-4.jpg", "alt": "Numerologie Zertifikat 4" },
+      { "image": "/images/certificates/cert-5.jpg", "alt": "Numerologie Zertifikat 5" },
+      { "image": "/images/certificates/cert-6.jpg", "alt": "Numerologie Zertifikat 6" },
+      { "image": "/images/certificates/cert-7.jpg", "alt": "Numerologie Zertifikat 7" },
+      { "image": "/images/certificates/cert-8.jpg", "alt": "Numerologie Zertifikat 8" },
+      { "image": "/images/certificates/cert-9.jpg", "alt": "Numerologie Zertifikat 9" },
+      { "image": "/images/certificates/cert-10.jpg", "alt": "Numerologie Zertifikat 10" },
+      { "image": "/images/certificates/cert-11.jpg", "alt": "Numerologie Zertifikat 11" }
+    ]
+  },
+  "thankYou": {
+    "title": "Vielen Dank!",
+    "subtitle": "Deine Nachricht wurde erfolgreich gesendet.",
+    "description": "Ich melde mich innerhalb von 24 Stunden bei dir. In der Zwischenzeit kannst du dir gerne eine kostenlose Beratung buchen.",
+    "backHome": "Zurück zur Startseite",
+    "bookConsultation": "Kostenlose Beratung buchen"
+  },
+  "cookie": {
+    "title": "Cookie-Einstellungen",
+    "description": "Wir verwenden Cookies, um dir die bestmögliche Erfahrung auf unserer Website zu bieten. Weitere Informationen findest du in unserer",
+    "privacyLink": "Datenschutzerklärung",
+    "acceptAll": "Alle akzeptieren",
+    "essentialOnly": "Nur notwendige",
+    "saveSelection": "Auswahl speichern",
+    "customize": "Einstellungen anpassen",
+    "catEssential": "Essenziell",
+    "catEssentialDesc": "Notwendig für grundlegende Funktionen der Website",
+    "catAnalytics": "Analyse",
+    "catAnalyticsDesc": "Google Analytics — hilft uns, die Website zu verbessern (Datenübertragung in die USA)",
+    "catMarketing": "Marketing",
+    "catMarketingDesc": "Meta Pixel — für personalisierte Werbung"
+  },
+  "verify": {
+    "success": "E-Mail erfolgreich bestätigt!",
+    "successDesc": "Deine detaillierte Numerologie-Analyse ist unterwegs. Schau in dein Postfach!",
+    "already": "Bereits bestätigt",
+    "alreadyDesc": "Deine E-Mail-Adresse wurde bereits bestätigt.",
+    "invalid": "Ungültiger Link",
+    "invalidDesc": "Dieser Bestätigungslink ist ungültig oder abgelaufen.",
+    "backToCalculator": "Zurück zum Rechner",
+    "bookConsultation": "Kostenlose Beratung buchen"
+  },
+  "karmicProducts": {
+    "sectionTitle": "Karmische Numerologie",
+    "sectionTitleAccent": "PDF-Analysen",
+    "sectionSubtitle": "Entdecke die Geheimnisse deiner Geburtszahlen. Jede Analyse basiert auf den 22 Arkanen der karmischen Numerologie.",
+    "cta": "Kostenlos testen",
+    "badge": "Kostenlos testen",
+    "birthdayCode": {
+      "title": "Geburtstags-Code",
+      "desc": "Dein Geburtstag ist deine Visitenkarte. Erfahre, welche Qualitäten du aus der Vergangenheit mitbringst und wie andere dich wahrnehmen."
+    },
+    "selfRealization": {
+      "title": "Selbstverwirklichungs-Code",
+      "desc": "In welcher Sphäre liegt dein Potenzial? Welche Berufe und Lebenswege passen zu deiner Energie?"
+    },
+    "karmicKnots": {
+      "title": "Karmischer-Knoten-Code",
+      "desc": "Welche Fehler aus der Vergangenheit trägst du mit dir? Welche Prüfungen warten auf dich und wie löst du sie?"
+    },
+    "yearForecast": {
+      "title": "Jahresprognose",
+      "desc": "Was bringt dir das aktuelle Jahr? Erkenne die Energien und Chancen, die vor dir liegen."
+    }
+  },
+  "footer": {
+    "tagline": "Deine Persönlichkeits-Landkarte für mehr Klarheit im Leben",
+    "quickLinks": "Quick Links",
+    "legal": "Rechtliches",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "cancellation": "Widerruf",
+    "imprintSocial": "Impressum Social Media",
+    "privacySocial": "Datenschutz Social Media",
+    "copyright": "Alle Rechte vorbehalten.",
+    "securePayment": "Sichere Zahlung",
+    "cookieSettings": "Cookie-Einstellungen"
+  }
+}

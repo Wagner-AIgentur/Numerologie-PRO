@@ -1,0 +1,136 @@
+{
+  "name": "Numerologie PRO — Abandoned Cart Recovery",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stripe-expired",
+        "responseMode": "responseNode"
+      },
+      "id": "webhook-trigger",
+      "name": "Stripe Expired Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const event = $input.first().json.body;\nif (event.type !== 'checkout.session.expired') {\n  return [];\n}\nconst session = event.data.object;\nreturn [{\n  json: {\n    email: session.customer_email,\n    packageKey: session.metadata?.package_key ?? 'unknown',\n    locale: session.metadata?.locale ?? 'de'\n  }\n}];"
+      },
+      "id": "parse-event",
+      "name": "Event parsen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "hours"
+      },
+      "id": "wait-1-hour",
+      "name": "1 Stunde warten",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.numerologie-pro.com/api/n8n/profile-lookup",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.CRON_SECRET}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ email: $('Event parsen').first().json.email }) }}"
+      },
+      "id": "find-profile",
+      "name": "Profil per E-Mail finden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "telegram-check",
+              "leftValue": "={{ $json[0]?.telegram_chat_id }}",
+              "rightValue": "",
+              "operator": { "type": "number", "operation": "exists" }
+            }
+          ]
+        }
+      },
+      "id": "has-telegram",
+      "name": "Hat Telegram?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $('Profil per E-Mail finden').first().json[0].telegram_chat_id, text: $('Event parsen').first().json.locale === 'de' ? '👋 <b>Du hast deine Buchung nicht abgeschlossen!</b>\\n\\nWir haben bemerkt, dass du deine Bestellung nicht beendet hast.\\n\\nKein Problem — dein Paket wartet auf dich! 🌟\\n\\n👉 https://numerologie-pro.com/de/pakete' : '👋 <b>Ты не завершил(а) оформление!</b>\\n\\nМы заметили, что ты не закончил(а) оплату.\\n\\nНичего страшного — твой пакет ждёт тебя! 🌟\\n\\n👉 https://numerologie-pro.com/ru/pakete', parse_mode: 'HTML' }) }}"
+      },
+      "id": "send-recovery",
+      "name": "Recovery per Telegram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems"
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [660, 500]
+    }
+  ],
+  "connections": {
+    "Stripe Expired Trigger": {
+      "main": [[{ "node": "Event parsen", "type": "main", "index": 0 }]]
+    },
+    "Event parsen": {
+      "main": [
+        [
+          { "node": "1 Stunde warten", "type": "main", "index": 0 },
+          { "node": "Respond OK", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "1 Stunde warten": {
+      "main": [[{ "node": "Profil per E-Mail finden", "type": "main", "index": 0 }]]
+    },
+    "Profil per E-Mail finden": {
+      "main": [[{ "node": "Hat Telegram?", "type": "main", "index": 0 }]]
+    },
+    "Hat Telegram?": {
+      "main": [
+        [{ "node": "Recovery per Telegram", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [{ "name": "Numerologie PRO" }, { "name": "Telegram" }, { "name": "Recovery" }]
+}

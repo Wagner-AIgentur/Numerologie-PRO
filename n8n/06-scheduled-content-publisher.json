@@ -1,0 +1,124 @@
+{
+  "name": "Numerologie PRO — Scheduled Content Publisher",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtMinute": 5
+            }
+          ]
+        }
+      },
+      "id": "cron-trigger",
+      "name": "Stündlich :05",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.numerologie-pro.com/api/cron/publish-scheduled",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.CRON_SECRET}}"
+            }
+          ]
+        }
+      },
+      "id": "publish-posts",
+      "name": "Scheduled Posts veröffentlichen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 300],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-published",
+              "leftValue": "={{ $json.published_count }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ]
+        }
+      },
+      "id": "check-published",
+      "name": "Posts veröffentlicht?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $env.TELEGRAM_ADMIN_CHAT_ID, text: '📢 Content Publisher: ' + $('Scheduled Posts veröffentlichen').first().json.published_count + ' Post(s) veröffentlicht.' }) }}"
+      },
+      "id": "admin-notify",
+      "name": "Admin: Veröffentlicht",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $env.TELEGRAM_ADMIN_CHAT_ID, text: '⚠️ Content Publisher Fehler. Bitte prüfen.' }) }}"
+      },
+      "id": "error-notify",
+      "name": "Admin: Fehler",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 500]
+    }
+  ],
+  "connections": {
+    "Stündlich :05": {
+      "main": [[{ "node": "Scheduled Posts veröffentlichen", "type": "main", "index": 0 }]]
+    },
+    "Scheduled Posts veröffentlichen": {
+      "main": [
+        [{ "node": "Posts veröffentlicht?", "type": "main", "index": 0 }],
+        [{ "node": "Admin: Fehler", "type": "main", "index": 0 }]
+      ]
+    },
+    "Posts veröffentlicht?": {
+      "main": [
+        [{ "node": "Admin: Veröffentlicht", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    { "name": "Numerologie PRO" },
+    { "name": "Telegram" },
+    { "name": "Content Studio" }
+  ]
+}

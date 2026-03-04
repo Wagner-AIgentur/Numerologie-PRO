@@ -1,0 +1,190 @@
+{
+  "name": "Numerologie PRO — Voice Agent Call Report (17 Felder)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "voice-agent-report",
+        "options": {
+          "rawBody": false
+        },
+        "responseMode": "responseNode"
+      },
+      "id": "webhook-trigger",
+      "name": "ElevenLabs Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "voice-agent-report"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse all 17 analysis fields — supports BOTH formats:\n// 1) ElevenLabs post_call_transcription (nested data_collection_results)\n// 2) Flat format from summary/route.ts\n\nconst raw = $input.first().json.body ?? $input.first().json;\nconst isElevenLabs = raw.type === 'post_call_transcription';\n\n// Helper: extract field from data_collection_results (with trimmed key fallback)\nfunction getField(dcr, fieldName) {\n  if (!dcr) return null;\n  if (dcr[fieldName]) return dcr[fieldName].value;\n  const key = Object.keys(dcr).find(k => k.trim() === fieldName);\n  return key ? dcr[key].value : null;\n}\n\nlet body;\nif (isElevenLabs) {\n  const dcr = raw.data?.analysis?.data_collection_results || {};\n  body = {\n    anrufer_name: getField(dcr, 'anrufer_name') || '',\n    anrufer_email: getField(dcr, 'anrufer_email') || '',\n    anrufer_telefon: getField(dcr, 'anrufer_telefon') || '',\n    sprache: getField(dcr, 'sprache') || 'de',\n    kategorie: getField(dcr, 'kategorie') || 'Allgemein',\n    thema: getField(dcr, 'thema') || 'Allgemein',\n    anliegen: getField(dcr, 'anliegen') || '',\n    interessiertes_paket: getField(dcr, 'interessiertes_paket') || 'keines',\n    kaufbereitschaft: getField(dcr, 'kaufbereitschaft') || 'unklar',\n    einwand: getField(dcr, 'einwand') || 'keiner',\n    geburtsdatum_genannt: getField(dcr, 'geburtsdatum_genannt'),\n    status: getField(dcr, 'status') || 'FAQ_beantwortet',\n    termin_gebucht: getField(dcr, 'termin_gebucht'),\n    termin_datum: getField(dcr, 'termin_datum') || '',\n    follow_up_noetig: getField(dcr, 'follow_up_noetig'),\n    naechster_schritt: getField(dcr, 'naechster_schritt') || 'Keine_Aktion',\n    zusammenfassung: getField(dcr, 'zusammenfassung') || ''\n  };\n} else {\n  body = raw;\n}\n\nconst now = new Date();\nconst id = `VA-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}${String(now.getSeconds()).padStart(2,'0')}`;\n\n// Convert booleans to Ja/Nein for German spreadsheet\nconst jaOderNein = (val) => val === true || val === 'true' ? 'Ja' : 'Nein';\n\nreturn [{\n  json: {\n    ID: id,\n    anrufer_name: body.anrufer_name || '',\n    anrufer_email: body.anrufer_email || '',\n    anrufer_telefon: body.anrufer_telefon || '',\n    sprache: body.sprache || 'de',\n    kategorie: body.kategorie || 'Allgemein',\n    thema: body.thema || 'Allgemein',\n    anliegen: body.anliegen || '',\n    interessiertes_paket: body.interessiertes_paket || 'keines',\n    kaufbereitschaft: body.kaufbereitschaft || 'unklar',\n    einwand: body.einwand || 'keiner',\n    geburtsdatum_genannt: jaOderNein(body.geburtsdatum_genannt),\n    status: body.status || 'FAQ_beantwortet',\n    termin_gebucht: jaOderNein(body.termin_gebucht),\n    termin_datum: body.termin_datum || '',\n    follow_up_noetig: jaOderNein(body.follow_up_noetig),\n    naechster_schritt: body.naechster_schritt || 'Keine_Aktion',\n    zusammenfassung: body.zusammenfassung || ''\n  }\n}];"
+      },
+      "id": "parse-data",
+      "name": "Daten aufbereiten (17 Felder)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1Zm358rWgVOLil5Xgrpc63Yc6AApPIuiBEnNzcprykHU"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Tabellenblatt1"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      },
+      "id": "google-sheets-append",
+      "name": "Google Sheets: Analyse speichern",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [660, 300],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false
+          },
+          "combinator": "or",
+          "conditions": [
+            {
+              "leftValue": "={{ $('Daten aufbereiten (17 Felder)').item.json.kaufbereitschaft }}",
+              "rightValue": "hoch",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "leftValue": "={{ $('Daten aufbereiten (17 Felder)').item.json.status }}",
+              "rightValue": "Termin_gebucht",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ]
+        }
+      },
+      "id": "check-hot-lead",
+      "name": "Hot Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $env.TELEGRAM_ADMIN_CHAT_ID, text: '🔥 <b>Hot Lead!</b>\\n\\n👤 Name: ' + $('Daten aufbereiten (17 Felder)').item.json.anrufer_name + '\\n📂 Kategorie: ' + $('Daten aufbereiten (17 Felder)').item.json.kategorie + '\\n📦 Paket: ' + $('Daten aufbereiten (17 Felder)').item.json.interessiertes_paket + '\\n💰 Kaufbereitschaft: ' + $('Daten aufbereiten (17 Felder)').item.json.kaufbereitschaft + '\\n📝 Nächster Schritt: ' + $('Daten aufbereiten (17 Felder)').item.json.naechster_schritt + '\\n\\n' + $('Daten aufbereiten (17 Felder)').item.json.zusammenfassung, parse_mode: 'HTML' }) }}"
+      },
+      "id": "telegram-notify",
+      "name": "Telegram: Hot-Lead Benachrichtigung",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Call report saved to Google Sheets' }) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "respond-success",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [660, 700]
+    }
+  ],
+  "connections": {
+    "ElevenLabs Webhook": {
+      "main": [
+        [
+          {
+            "node": "Daten aufbereiten (17 Felder)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daten aufbereiten (17 Felder)": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets: Analyse speichern",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets: Analyse speichern": {
+      "main": [
+        [
+          {
+            "node": "Hot Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hot Lead?": {
+      "main": [
+        [
+          {
+            "node": "Telegram: Hot-Lead Benachrichtigung",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "Voice Agent",
+      "id": "voice-agent"
+    },
+    {
+      "name": "Numerologie PRO",
+      "id": "numerologie-pro"
+    }
+  ],
+  "pinData": {}
+}

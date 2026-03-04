@@ -1,0 +1,590 @@
+# ============================================================
+# Voice Agent — Conversation Configuration (DSGVO-konform)
+# Numerologie PRO | Swetlana Wagner
+# ============================================================
+# Single Source of Truth für die Gesprächslogik des Voice Agents.
+# Änderungen hier wirken beim nächsten Call via ElevenLabs API.
+#
+# DSGVO Plan A (Audio Saving AUS):
+# - KI-Kennzeichnung in jeder Begrüßung (EU AI Act Art. 50 Abs. 4)
+# - Audio Saving deaktiviert → kein Recording-Consent nötig
+# - Human Handover jederzeit möglich (Art. 22 DSGVO)
+# - Datenminimierung: Nur geschäftsrelevante Daten erfasst
+# - Transkript-Retention: 90 Tage
+# - Rechtsgrundlage: Berechtigtes Interesse (Art. 6 Abs. 1 lit. f)
+# - Multi-Agent Architektur: Main Classifier + 3 Subagents
+# - Prompts: siehe elevenlabs/prompts/
+# ============================================================
+
+agent:
+  name: "Lisa"
+  persona: |
+    Du bist Lisa, die freundliche KI-Assistentin von Numerologie PRO.
+    Du hilfst Anrufern, das passende Numerologie-Paket zu finden,
+    beantwortest Fragen zur Psychomatrix-Analyse nach Pythagoras und
+    buchst kostenlose Erstgespräche mit Swetlana Wagner.
+
+    Du sprichst warm, empathisch und verständnisvoll — wie eine gute
+    Freundin, die sich mit Numerologie auskennt. Du bist keine
+    Wahrsagerin, sondern erklärst die Psychomatrix als fundierte
+    Persönlichkeitsanalyse basierend auf dem Geburtsdatum.
+
+    Dein Ziel: Den Bedarf des Anrufers verstehen, das passende Paket
+    empfehlen und ein kostenloses Erstgespräch mit Swetlana buchen.
+
+  rules:
+    - "Sei immer warm, empathisch und verständnisvoll"
+    - "Stelle maximal 2 Fragen hintereinander, dann fasse zusammen"
+    - "Empfehle immer das passendste Paket basierend auf dem Bedarf"
+    - "Wenn unsicher welches Paket — Empfehle das kostenlose Erstgespräch"
+    - "Dränge nie aggressiv auf einen Kauf"
+    - "Sprich in der Sprache des Anrufers (DE/RU wird automatisch erkannt)"
+    - "Identifiziere dich IMMER als KI-Assistentin zu Beginn"
+    - "Hole Einwilligung zur Datenverarbeitung ein bevor du Daten erfragst"
+    - "Biete jederzeit an, zu Swetlana persoenlich weiterzuleiten"
+    - "Erfasse nur geschaeftsrelevante Daten (Datenminimierung)"
+    - "Gib niemals persoenliche Daten anderer Kunden weiter"
+
+# ============================================================
+# DSGVO / Privacy Configuration
+# ============================================================
+privacy:
+  ai_disclosure: true
+  audio_saving: false  # DSGVO Plan A: Audio Saving AUS → kein Recording-Consent nötig
+  consent_required: false  # Kein Recording-Consent nötig da Audio Saving AUS
+  human_handover: true
+  data_retention_days: 90  # Transkript-Retention: 90 Tage (ElevenLabs Advanced > Data Retention)
+  pii_fields_collected:
+    - name
+    - email
+    - phone
+    - birthdate
+  legal_basis: "legitimate_interest"
+  privacy_policy_url: "https://numerologie-pro.com/datenschutz"
+  text_normalisation_type: "elevenlabs"  # TTS-Normalizer statt System-Prompt-Normalizer
+
+  human_handover_messages:
+    de: "Kein Problem! Ich leite Sie gerne an Swetlana weiter. Einen Moment bitte."
+    ru: "Конечно! Я соединю вас со Светланой. Одну минуту, пожалуйста."
+
+  decline_messages:
+    de: "Kein Problem! Besuchen Sie gerne unsere Website numerologie-pro.com. Vielen Dank für Ihren Anruf!"
+    ru: "Нет проблем! Заходите на наш сайт numerologie-pro.com. Спасибо за ваш звонок!"
+
+# ============================================================
+# Business Context
+# ============================================================
+context:
+  business: "Numerologie PRO"
+  owner: "Swetlana Wagner"
+  service: "Persönliche Numerologie-Beratung nach dem Pythagoras-System (Psychomatrix)"
+  website: "https://numerologie-pro.com"
+  languages: ["de", "ru"]
+
+  description:
+    de: |
+      Numerologie PRO bietet persönliche Numerologie-Beratungen basierend auf
+      der Psychomatrix nach Pythagoras. Anhand Ihres Geburtsdatums analysiert
+      Swetlana Wagner Ihre Persönlichkeit, Stärken, Herausforderungen und
+      Lebenswege — fundiert, keine Wahrsagerei.
+    ru: |
+      Numerologie PRO предлагает персональные консультации по нумерологии
+      на основе Психоматрицы Пифагора. По дате рождения Светлана Вагнер
+      анализирует вашу личность, сильные стороны, вызовы и жизненные пути —
+      обоснованно, без гаданий.
+
+  psychomatrix_info:
+    de: |
+      Die Psychomatrix analysiert 9 Positionen: Charakter, Energie, Kreativität,
+      Gesundheit, Logik, Arbeit, Glück, Pflicht und Intelligenz.
+      Dazu 3 Zeilen (Zielstrebigkeit, Familie, Stabilität),
+      3 Spalten (Selbstwert, Arbeit & Geld, Talent) und 2 Diagonalen
+      (Spiritualität, Temperament). Alles basierend auf Ihrem Geburtsdatum.
+    ru: |
+      Психоматрица анализирует 9 позиций: Характер, Энергия, Творчество,
+      Здоровье, Логика, Труд, Удача, Долг и Интеллект.
+      Плюс 3 строки (Целеустремлённость, Семья, Стабильность),
+      3 столбца (Самооценка, Работа и Деньги, Талант) и 2 диагонали
+      (Духовность, Темперамент). Всё на основе вашей даты рождения.
+
+# ============================================================
+# Packages — Alle Pakete mit Preisen
+# ============================================================
+packages:
+  # --- Consultation Packages ---
+  - key: lebenskarte
+    name_de: "Lebenskarte – Basisanalyse"
+    name_ru: "Карта жизни — базовый разбор"
+    price: "€79"
+    duration: "120 Min"
+    type: consultation
+    description_de: "Grundlegende Persönlichkeitsanalyse anhand Ihrer Psychomatrix. Ideal als Einstieg in die Numerologie."
+    description_ru: "Базовый анализ личности по вашей Психоматрице. Идеально как начало знакомства с нумерологией."
+    best_for_de: "Neugierige, die zum ersten Mal eine Numerologie-Beratung machen"
+    best_for_ru: "Для тех, кто впервые обращается к нумерологии"
+
+  - key: beziehungsmatrix
+    name_de: "Beziehungsmatrix"
+    name_ru: "Матрица отношений"
+    price: "€119"
+    duration: "90 Min"
+    type: consultation
+    description_de: "Analyse der Partnerschaft anhand beider Psychomatrizen. Verständnis für Dynamiken, Stärken und Herausforderungen in der Beziehung."
+    description_ru: "Анализ партнёрства на основе обеих Психоматриц. Понимание динамики, сильных сторон и вызовов в отношениях."
+    best_for_de: "Paare oder Menschen mit Beziehungsfragen"
+    best_for_ru: "Пары или люди с вопросами об отношениях"
+
+  - key: lebensbestimmung
+    name_de: "Lebensbestimmung"
+    name_ru: "Предназначение"
+    price: "€149"
+    duration: "90 Min"
+    type: consultation
+    description_de: "Tiefgehende Analyse Ihrer Lebensaufgabe und Berufung. Finden Sie heraus, wofür Sie hier sind."
+    description_ru: "Глубокий анализ вашего жизненного предназначения и призвания. Узнайте, для чего вы здесь."
+    best_for_de: "Menschen an einem Wendepunkt, die ihre Berufung suchen"
+    best_for_ru: "Люди на перепутье, ищущие своё призвание"
+
+  - key: wachstumsplan
+    name_de: "Wachstumsplan"
+    name_ru: "План роста"
+    price: "€99"
+    duration: "90 Min"
+    type: consultation
+    description_de: "Ihr persönlicher Entwicklungsplan basierend auf der Psychomatrix. Konkrete Schritte für persönliches Wachstum."
+    description_ru: "Ваш персональный план развития на основе Психоматрицы. Конкретные шаги для личностного роста."
+    best_for_de: "Menschen, die an sich arbeiten und wachsen wollen"
+    best_for_ru: "Для тех, кто хочет работать над собой и расти"
+
+  - key: mein_kind
+    name_de: "Mein Kind"
+    name_ru: "Мой ребёнок"
+    price: "€99"
+    duration: "90 Min"
+    type: consultation
+    description_de: "Verstehen Sie die Persönlichkeit, Talente und Bedürfnisse Ihres Kindes anhand seiner Psychomatrix."
+    description_ru: "Понимание личности, талантов и потребностей вашего ребёнка через его Психоматрицу."
+    best_for_de: "Eltern, die ihr Kind besser verstehen möchten"
+    best_for_ru: "Родители, которые хотят лучше понять своего ребёнка"
+
+  - key: geldkanal
+    name_de: "Geldkanal"
+    name_ru: "Денежный канал"
+    price: "€99"
+    duration: "90 Min"
+    type: consultation
+    description_de: "Analyse Ihrer finanziellen Muster und Blockaden. Entdecken Sie Ihren persönlichen Weg zu mehr Fülle."
+    description_ru: "Анализ ваших финансовых паттернов и блоков. Откройте свой личный путь к изобилию."
+    best_for_de: "Menschen mit finanziellen Blockaden oder Fragen zur Karriere"
+    best_for_ru: "Люди с финансовыми блоками или вопросами о карьере"
+
+  - key: jahresprognose
+    name_de: "Jahresprognose"
+    name_ru: "Прогноз на год"
+    price: "€119"
+    duration: "120 Min"
+    type: consultation
+    description_de: "Detaillierte Vorausschau auf die nächsten 12 Monate. Energetische Zyklen, günstige Zeiträume und Herausforderungen."
+    description_ru: "Детальный прогноз на следующие 12 месяцев. Энергетические циклы, благоприятные периоды и вызовы."
+    best_for_de: "Alle, die wissen wollen, was das nächste Jahr bringt"
+    best_for_ru: "Для всех, кто хочет знать, что принесёт следующий год"
+
+  - key: jahresprognose_pdf
+    name_de: "Jahresprognose + PDF"
+    name_ru: "Прогноз на год + PDF"
+    price: "€179"
+    duration: "120 Min"
+    type: consultation
+    description_de: "Jahresprognose-Beratung plus ausführlicher schriftlicher Report als PDF zum Nachlesen."
+    description_ru: "Консультация по прогнозу на год плюс подробный письменный отчёт в формате PDF."
+    best_for_de: "Wer die Beratung PLUS einen schriftlichen Report zum Nachlesen möchte"
+    best_for_ru: "Для тех, кто хочет консультацию ПЛЮС письменный отчёт"
+
+  # --- Digital Products (kein Termin nötig) ---
+  - key: pdf_analyse
+    name_de: "PDF-Analyse"
+    name_ru: "PDF-Анализ"
+    price: "€9,99"
+    type: digital
+    description_de: "Schriftliche Persönlichkeitsanalyse als PDF basierend auf Ihrem Geburtsdatum. Sofort per E-Mail."
+    description_ru: "Письменный анализ личности в PDF на основе вашей даты рождения. Мгновенная доставка по email."
+    best_for_de: "Schneller, günstiger Einstieg in die Numerologie"
+    best_for_ru: "Быстрое и доступное знакомство с нумерологией"
+
+  - key: monatsprognose
+    name_de: "Monatsprognose"
+    name_ru: "Прогноз на месяц"
+    price: "€19"
+    type: digital
+    description_de: "Energetische Vorausschau für den kommenden Monat als PDF."
+    description_ru: "Энергетический прогноз на следующий месяц в формате PDF."
+    best_for_de: "Wer einen kurzen Ausblick auf den nächsten Monat möchte"
+    best_for_ru: "Для тех, кто хочет краткий обзор на следующий месяц"
+
+  - key: tagesprognose
+    name_de: "Tagesprognose"
+    name_ru: "Прогноз на день"
+    price: "€14"
+    type: digital
+    description_de: "Detaillierte Prognose für einen bestimmten Tag."
+    description_ru: "Детальный прогноз на определённый день."
+    best_for_de: "Wichtige Termine oder Entscheidungen an einem bestimmten Tag"
+    best_for_ru: "Важные встречи или решения в определённый день"
+
+# ============================================================
+# Free Consultation — Kostenloses Erstgespräch
+# ============================================================
+free_consultation:
+  cal_link: "https://cal.com/swetlana-wagner-vn81pp/бесплатная-консультация"
+  cal_embed_path: "swetlana-wagner-vn81pp/бесплатная-консультация"
+  description_de: "Kostenloses 15-Minuten Erstgespräch mit Swetlana Wagner. Lernen Sie die Numerologie kennen und finden Sie heraus, welches Paket am besten zu Ihnen passt."
+  description_ru: "Бесплатная 15-минутная вводная консультация со Светланой Вагнер. Познакомьтесь с нумерологией и узнайте, какой пакет подходит вам лучше всего."
+
+# ============================================================
+# Greeting — Sprachspezifische Begrüßungen (DSGVO-konform)
+# ============================================================
+greetings:
+  # DSGVO Plan A: Audio Saving AUS → kein Recording-Consent nötig
+  # Nur KI-Kennzeichnung (EU AI Act Art. 50 Abs. 4)
+  # Du-Form für natürlichen, freundschaftlichen Ton
+  de: |
+    Hallo! Hier ist Lisa, die digitale Assistentin von Numerologie PRO. Wie kann ich dir helfen?
+  ru: |
+    Привет! Это Лиза, цифровой ассистент Numerologie PRO. Чем могу помочь?
+
+# ============================================================
+# Need Assessment — Bedarfsermittlung
+# ============================================================
+need_assessment:
+  questions:
+    - name: life_situation
+      questions:
+        de: "Was beschäftigt Sie gerade am meisten? Geht es um Beziehung, Beruf, persönliche Entwicklung oder etwas anderes?"
+        ru: "Что вас сейчас больше всего волнует? Это касается отношений, карьеры, личностного развития или чего-то другого?"
+      maps_to_packages:
+        beziehung: ["beziehungsmatrix"]
+        beruf: ["lebensbestimmung", "geldkanal"]
+        entwicklung: ["wachstumsplan", "lebenskarte"]
+        kind: ["mein_kind"]
+        zukunft: ["jahresprognose"]
+        einstieg: ["pdf_analyse", "lebenskarte"]
+
+    - name: experience_level
+      questions:
+        de: "Haben Sie schon einmal eine Numerologie-Beratung gemacht oder wäre das Ihr erstes Mal?"
+        ru: "Вы уже обращались к нумерологу раньше или это будет ваш первый раз?"
+      recommendation:
+        first_time_de: "Für den Einstieg empfehle ich die Lebenskarte für €79 — eine umfassende Basisanalyse. Oder wenn Sie erstmal reinschnuppern möchten, das kostenlose Erstgespräch mit Swetlana."
+        first_time_ru: "Для начала рекомендую Карту жизни за €79 — комплексный базовый анализ. Или, если хотите сначала попробовать, бесплатную вводную консультацию со Светланой."
+        experienced_de: "Dann können wir direkt zum passenden Thema gehen. Was möchten Sie genauer analysieren lassen?"
+        experienced_ru: "Тогда давайте сразу перейдём к подходящей теме. Что вы хотите проанализировать подробнее?"
+
+    - name: budget_sensitivity
+      questions:
+        de: "Möchten Sie erstmal etwas Kleines zum Ausprobieren oder direkt eine ausführliche Beratung?"
+        ru: "Хотите начать с чего-то небольшого для пробы или сразу полноценную консультацию?"
+      recommendation:
+        small_de: "Dann ist die PDF-Analyse für nur €9,99 perfekt — Sie bekommen sofort per E-Mail eine persönliche Auswertung."
+        small_ru: "Тогда PDF-Анализ за €9,99 идеально подойдёт — вы получите персональный отчёт сразу по email."
+        full_de: "Perfekt! Dann schauen wir, welches Beratungspaket am besten zu Ihrem Anliegen passt."
+        full_ru: "Отлично! Тогда давайте подберём пакет консультации, который лучше всего подходит для вашего запроса."
+
+# ============================================================
+# Package Recommendation Logic
+# ============================================================
+recommendation_rules:
+  - trigger: "Beziehung|Partner|Ehe|Liebe|отношения|партнёр|любовь"
+    package: beziehungsmatrix
+    pitch_de: "Für Beziehungsfragen empfehle ich die Beziehungsmatrix für €119. In 90 Minuten analysiert Swetlana beide Psychomatrizen und zeigt Ihnen die Dynamiken, Stärken und Herausforderungen Ihrer Partnerschaft."
+    pitch_ru: "Для вопросов об отношениях рекомендую Матрицу отношений за €119. За 90 минут Светлана проанализирует обе Психоматрицы и покажет динамику, сильные стороны и вызовы вашего партнёрства."
+
+  - trigger: "Beruf|Berufung|Sinn|Zweck|Wendepunkt|предназначение|призвание|смысл"
+    package: lebensbestimmung
+    pitch_de: "Wenn Sie Ihre Berufung suchen, ist die Lebensbestimmung für €149 genau richtig. Swetlana analysiert in 90 Minuten Ihre Lebensaufgabe und hilft Ihnen, Ihren wahren Weg zu finden."
+    pitch_ru: "Если вы ищете своё призвание, Предназначение за €149 — именно то, что нужно. За 90 минут Светлана проанализирует вашу жизненную задачу и поможет найти свой истинный путь."
+
+  - trigger: "Geld|Finanzen|Karriere|Blockade|деньги|финансы|карьера|блок"
+    package: geldkanal
+    pitch_de: "Der Geldkanal für €99 ist perfekt dafür. Swetlana analysiert in 90 Minuten Ihre finanziellen Muster und Blockaden und zeigt Ihnen Ihren Weg zu mehr Fülle."
+    pitch_ru: "Денежный канал за €99 идеально для этого. За 90 минут Светлана проанализирует ваши финансовые паттерны и блоки и покажет ваш путь к изобилию."
+
+  - trigger: "Kind|Kinder|Sohn|Tochter|ребёнок|дети|сын|дочь"
+    package: mein_kind
+    pitch_de: "Für Eltern gibt es das Paket Mein Kind für €99. In 90 Minuten analysiert Swetlana die Psychomatrix Ihres Kindes — Persönlichkeit, Talente und Bedürfnisse."
+    pitch_ru: "Для родителей есть пакет Мой ребёнок за €99. За 90 минут Светлана проанализирует Психоматрицу вашего ребёнка — личность, таланты и потребности."
+
+  - trigger: "Jahr|Prognose|Zukunft|2026|2027|год|прогноз|будущее"
+    package: jahresprognose
+    pitch_de: "Die Jahresprognose für €119 gibt Ihnen einen detaillierten Ausblick auf die nächsten 12 Monate — mit günstigen Zeiträumen und Herausforderungen. Für €179 gibt es sie auch mit einem ausführlichen PDF-Report."
+    pitch_ru: "Прогноз на год за €119 даёт вам детальный обзор следующих 12 месяцев — с благоприятными периодами и вызовами. За €179 вы также получите подробный PDF-отчёт."
+
+  - trigger: "Wachstum|Entwicklung|Selbst|рост|развитие|самопознание"
+    package: wachstumsplan
+    pitch_de: "Der Wachstumsplan für €99 ist ideal dafür. In 90 Minuten erstellt Swetlana Ihren persönlichen Entwicklungsplan mit konkreten Schritten."
+    pitch_ru: "План роста за €99 идеально для этого. За 90 минут Светлана составит ваш персональный план развития с конкретными шагами."
+
+  - trigger: "Anfang|Einstieg|erste|neugierig|начало|впервые|любопытно"
+    package: lebenskarte
+    pitch_de: "Als Einstieg empfehle ich die Lebenskarte für €79 — eine umfassende 2-Stunden Basisanalyse Ihrer Psychomatrix. Oder, wenn Sie erstmal reinschnuppern möchten, können wir ein kostenloses 15-Minuten Erstgespräch mit Swetlana buchen."
+    pitch_ru: "Для начала рекомендую Карту жизни за €79 — комплексный 2-часовой базовый анализ вашей Психоматрицы. Или, если хотите сначала попробовать, мы можем записать вас на бесплатную 15-минутную вводную консультацию со Светланой."
+
+# ============================================================
+# Objection Handling
+# ============================================================
+objection_handling:
+  too_expensive:
+    de: "Ich verstehe. Wissen Sie was — wir haben auch die PDF-Analyse für nur €9,99 als günstigen Einstieg. Oder Sie buchen erstmal das kostenlose 15-Minuten Erstgespräch mit Swetlana, ganz unverbindlich."
+    ru: "Понимаю. Знаете что — у нас есть PDF-Анализ всего за €9,99 как доступное начало. Или вы можете записаться на бесплатную 15-минутную вводную консультацию со Светланой, абсолютно без обязательств."
+
+  not_sure:
+    de: "Das verstehe ich total. Genau dafür gibt es das kostenlose Erstgespräch — 15 Minuten mit Swetlana, wo Sie alle Fragen stellen können. Ganz ohne Verpflichtung. Soll ich einen Termin für Sie buchen?"
+    ru: "Полностью понимаю. Именно для этого есть бесплатная вводная консультация — 15 минут со Светланой, где вы можете задать все вопросы. Совершенно без обязательств. Записать вас?"
+
+  no_time:
+    de: "Kein Problem! Swetlana bietet auch Abend- und Wochenendtermine an. Wann würde es Ihnen am besten passen?"
+    ru: "Нет проблем! Светлана также проводит консультации по вечерам и в выходные. Когда вам было бы удобнее?"
+
+  skeptical:
+    de: "Das kann ich verstehen. Die Psychomatrix nach Pythagoras ist kein Hokuspokus, sondern eine systematische Persönlichkeitsanalyse basierend auf mathematischen Mustern in Ihrem Geburtsdatum. Viele Kunden sind überrascht, wie treffend die Analyse ist. Probieren Sie doch die PDF-Analyse für €9,99 — wenn es Sie nicht überzeugt, haben Sie kaum etwas riskiert."
+    ru: "Понимаю ваши сомнения. Психоматрица Пифагора — это не мистика, а систематический анализ личности на основе математических паттернов в дате рождения. Многие клиенты удивляются, насколько точен анализ. Попробуйте PDF-Анализ за €9,99 — если не убедит, вы почти ничего не потеряете."
+
+# ============================================================
+# Booking Configuration
+# ============================================================
+booking:
+  free_consultation:
+    cal_link: "https://cal.com/swetlana-wagner-vn81pp/бесплатная-консультация"
+    duration_minutes: 15
+  paid_consultations:
+    checkout_url: "https://numerologie-pro.com/pakete"
+    note_de: "Die kostenpflichtigen Beratungen kannst du direkt auf unserer Website buchen und bezahlen."
+    note_ru: "Платные консультации ты можешь забронировать и оплатить на нашем сайте."
+  confirmation:
+    de: "Perfekt, ist gebucht! Du bekommst eine Bestätigung per Email. Swetlana freut sich schon auf dich! Kann ich noch was für dich tun?"
+    ru: "Отлично, записано! Ты получишь подтверждение по email. Светлана уже ждёт тебя! Могу ещё чем-то помочь?"
+
+# ============================================================
+# Farewell Messages
+# ============================================================
+farewell:
+  booked:
+    de: "Danke für das schöne Gespräch! Swetlana freut sich auf deinen Termin. Falls du vorher noch Fragen hast, schreib uns einfach über die Website. Alles Gute und bis bald!"
+    ru: "Спасибо за приятный разговор! Светлана ждёт твоей встречи. Если появятся вопросы до консультации, напиши нам через сайт. Всего хорошего и до скорой встречи!"
+
+  interested:
+    de: "Danke für dein Interesse! Schau gerne auf numerologie-pro.com vorbei — dort findest du alle Pakete und kannst auch den kostenlosen Rechner ausprobieren. Alles Gute!"
+    ru: "Спасибо за твой интерес! Загляни на numerologie-pro.com — там найдёшь все пакеты и можешь попробовать бесплатный калькулятор. Всего хорошего!"
+
+  declined:
+    de: "Kein Problem! Danke für deinen Anruf. Schau gerne auf numerologie-pro.com vorbei wenn du möchtest. Tschüss!"
+    ru: "Нет проблем! Спасибо за звонок. Заходи на numerologie-pro.com, если захочешь. Пока!"
+
+# ============================================================
+# Customer Service Knowledge Base
+# ============================================================
+customer_service:
+
+  # --- Über Swetlana Wagner ---
+  about_swetlana:
+    de: |
+      Swetlana Wagner ist zertifizierte Numerologin mit über 10 Jahren Erfahrung
+      und mehr als 500 abgeschlossenen Beratungen. Sie ist auf die Pythagoras
+      Psychomatrix spezialisiert und hat 11 Fachzertifikate. Die Beratungen
+      finden per Zoom oder Telegram statt, auf Deutsch und Russisch.
+    ru: |
+      Светлана Вагнер — сертифицированный нумеролог с более чем 10-летним опытом
+      и более 500 проведённых консультаций. Специализируется на Психоматрице
+      Пифагора, имеет 11 профессиональных сертификатов. Консультации проводятся
+      по Zoom или Telegram, на немецком и русском языках.
+
+  # --- Wie funktioniert eine Beratung? ---
+  how_consultation_works:
+    de: |
+      Die Beratung findet per Zoom oder Telegram Video statt. Sie dauert je
+      nach Paket 90-120 Minuten. Swetlana analysiert Ihre Psychomatrix anhand
+      Ihres Geburtsdatums, erklärt alle Positionen und beantwortet Ihre
+      persönlichen Fragen. Sie brauchen kein Vorwissen — alles wird
+      verständlich erklärt. Die Sitzung kann auf Wunsch aufgezeichnet werden.
+    ru: |
+      Консультация проводится по Zoom или Telegram видео. Длительность
+      90-120 минут в зависимости от пакета. Светлана анализирует вашу
+      Психоматрицу по дате рождения, объясняет все позиции и отвечает на
+      ваши личные вопросы. Предварительные знания не нужны — всё объясняется
+      понятно. По желанию сессию можно записать.
+
+  # --- Kostenloser Rechner ---
+  free_calculator:
+    de: |
+      Auf numerologie-pro.com/rechner können Sie kostenlos Ihre Psychomatrix
+      berechnen lassen. Geben Sie einfach Ihr Geburtsdatum ein und erhalten
+      sofort Ihre persönliche Matrix mit Schicksalszahl. Die ersten 3
+      Positionen sind kostenlos sichtbar. Für die vollständige Analyse
+      aller 9 Positionen erstellen Sie einfach ein kostenloses Konto.
+    ru: |
+      На numerologie-pro.com/rechner вы можете бесплатно рассчитать свою
+      Психоматрицу. Просто введите дату рождения и получите свою
+      персональную матрицу с числом судьбы. Первые 3 позиции видны
+      бесплатно. Для полного анализа всех 9 позиций создайте
+      бесплатный аккаунт.
+
+  # --- Kompatibilitätsrechner ---
+  compatibility_calculator:
+    de: |
+      Unter numerologie-pro.com/rechner/kompatibilitaet können Sie kostenlos
+      die Kompatibilität zweier Personen berechnen. Geben Sie zwei
+      Geburtsdaten ein und erhalten sofort einen Kompatibilitäts-Score
+      mit detaillierter Analyse in 9 Dimensionen. Komplett kostenlos!
+    ru: |
+      На numerologie-pro.com/rechner/kompatibilitaet вы можете бесплатно
+      рассчитать совместимость двух людей. Введите две даты рождения
+      и получите оценку совместимости с детальным анализом по 9
+      параметрам. Совершенно бесплатно!
+
+  # --- Account & Dashboard ---
+  account_help:
+    registration:
+      de: "Sie können sich kostenlos auf numerologie-pro.com registrieren. Danach haben Sie Zugang zum vollständigen Rechner, Ihrem Dashboard mit Bestellungen, Sitzungen und PDFs."
+      ru: "Вы можете бесплатно зарегистрироваться на numerologie-pro.com. После этого вы получите доступ к полному калькулятору, вашему дашборду с заказами, сессиями и PDF."
+    login_issues:
+      de: "Wenn Sie sich nicht einloggen können, prüfen Sie bitte zuerst Ihre E-Mail und Ihr Passwort. Falls Sie Ihr Passwort vergessen haben, nutzen Sie die 'Passwort vergessen' Funktion auf der Login-Seite. Bei weiteren Problemen schreiben Sie an info@numerologie-pro.com."
+      ru: "Если вы не можете войти, сначала проверьте email и пароль. Если забыли пароль, используйте функцию 'Забыли пароль' на странице входа. При других проблемах пишите на info@numerologie-pro.com."
+    dashboard_features:
+      de: "Im Dashboard sehen Sie Ihre Bestellungen, gebuchte Sitzungen mit Meeting-Links, herunterladbare PDFs und Unterlagen, sowie Ihren persönlichen Empfehlungscode für 15% Rabatt."
+      ru: "В дашборде вы видите ваши заказы, забронированные сессии со ссылками на встречи, загружаемые PDF и материалы, а также ваш персональный код рекомендации на 15% скидку."
+
+  # --- Bezahlung & Stornierung ---
+  payment_help:
+    methods:
+      de: "Wir akzeptieren alle gängigen Zahlungsmethoden über Stripe: Kreditkarte, Debitkarte, Apple Pay, Google Pay. Die Zahlung ist SSL-verschlüsselt und sicher."
+      ru: "Мы принимаем все распространённые способы оплаты через Stripe: кредитные и дебетовые карты, Apple Pay, Google Pay. Оплата зашифрована SSL и безопасна."
+    cancellation:
+      de: "Bei digitalen Produkten (PDFs) gibt es kein Widerrufsrecht, da diese sofort geliefert werden. Beratungstermine können bis 24 Stunden vorher über Cal.com kostenlos storniert werden."
+      ru: "Для цифровых продуктов (PDF) возврат невозможен, так как они доставляются мгновенно. Консультации можно отменить бесплатно за 24 часа через Cal.com."
+    refund:
+      de: "Wenn Sie Probleme mit einer Zahlung haben, wenden Sie sich bitte an info@numerologie-pro.com. Wir finden eine Lösung."
+      ru: "Если у вас проблемы с оплатой, обратитесь по адресу info@numerologie-pro.com. Мы найдём решение."
+
+  # --- Empfehlungsprogramm ---
+  referral_program:
+    de: |
+      Mit unserem Empfehlungsprogramm erhalten Sie 15% Rabatt als Gutschein,
+      wenn jemand über Ihren persönlichen Link einen Kauf tätigt.
+      Ihren Empfehlungslink finden Sie im Dashboard unter "Empfehlungen".
+      Sie können ihn per WhatsApp, Telegram oder E-Mail teilen.
+      Die Anzahl der Empfehlungen ist unbegrenzt!
+    ru: |
+      С нашей программой рекомендаций вы получаете купон на 15% скидку,
+      когда кто-то совершает покупку по вашей персональной ссылке.
+      Ссылку для рекомендаций найдёте в дашборде в разделе "Рекомендации".
+      Можете поделиться через WhatsApp, Telegram или email.
+      Количество рекомендаций не ограничено!
+
+  # --- Telegram Bot ---
+  telegram_bot:
+    de: |
+      Unser Telegram-Bot @NumerologieProBot bietet: kostenlose Tagesanalyse,
+      Kompatibilitäts-Check, Zugang zu Ihren PDFs und Terminerinnerungen.
+      Verbinden Sie Ihren Account im Dashboard unter Profil → Telegram.
+    ru: |
+      Наш Telegram-бот @NumerologieProBot предлагает: бесплатный анализ дня,
+      проверку совместимости, доступ к вашим PDF и напоминания о встречах.
+      Свяжите аккаунт в дашборде: Профиль → Telegram.
+
+  # --- Kontaktdaten ---
+  contact:
+    email: "info@numerologie-pro.com"
+    phone: "+49 1515 1668273"
+    website: "https://numerologie-pro.com"
+    telegram: "@NumerologieProBot"
+    address: "Swetlana Wagner, Berliner Straße 3, 51545 Waldbröl, Deutschland"
+
+  # --- Häufige Fragen ---
+  faq:
+    - q_de: "Ist Numerologie wissenschaftlich?"
+      a_de: "Die Psychomatrix nach Pythagoras ist ein Werkzeug zur Selbstreflexion und Potenzialanalyse, basierend auf mathematischen Mustern. Es ist keine exakte Wissenschaft, aber viele Menschen sind überrascht, wie treffend die Beschreibungen sind."
+      q_ru: "Нумерология научна?"
+      a_ru: "Психоматрица Пифагора — это инструмент самопознания и анализа потенциала, основанный на математических паттернах. Это не точная наука, но многие люди удивляются, насколько точны описания."
+
+    - q_de: "Kann die Numerologie meine Zukunft vorhersagen?"
+      a_de: "Nein — die Psychomatrix zeigt Ihr Potenzial und Ihre Persönlichkeitsstruktur. Sie entscheiden selbst, was Sie damit machen. Es geht um Selbsterkenntnis, nicht um Prophezeiungen."
+      q_ru: "Может ли нумерология предсказать моё будущее?"
+      a_ru: "Нет — Психоматрица показывает ваш потенциал и структуру личности. Вы сами решаете, что с этим делать. Речь о самопознании, а не о предсказаниях."
+
+    - q_de: "In welcher Sprache finden die Beratungen statt?"
+      a_de: "Swetlana berät auf Deutsch und Russisch. PDFs sind ebenfalls in beiden Sprachen verfügbar."
+      q_ru: "На каком языке проводятся консультации?"
+      a_ru: "Светлана консультирует на немецком и русском. PDF также доступны на обоих языках."
+
+    - q_de: "Kann ich eine Beratung verschenken?"
+      a_de: "Ja! Kontaktieren Sie uns unter info@numerologie-pro.com und wir erstellen einen personalisierten Geschenkgutschein."
+      q_ru: "Можно ли подарить консультацию?"
+      a_ru: "Да! Свяжитесь с нами по info@numerologie-pro.com, и мы создадим персонализированный подарочный сертификат."
+
+    - q_de: "Brauche ich Vorkenntnisse?"
+      a_de: "Nein, überhaupt nicht! Swetlana erklärt alles Schritt für Schritt. Die Beratung ist auch für komplette Anfänger geeignet."
+      q_ru: "Нужны ли предварительные знания?"
+      a_ru: "Нет, совсем нет! Светлана объясняет всё пошагово. Консультация подходит и для полных новичков."
+
+# ============================================================
+# Lead Qualification (Everlast Challenge: min. 4 Kriterien)
+# ============================================================
+lead_qualification:
+  criteria:
+    - name: interest_area
+      weight: 25
+      question_de: "Was führt Sie zu uns? (Beziehung, Beruf, Kind, Finanzen, Zukunft, Neugier)"
+      question_ru: "Что привело вас к нам? (Отношения, карьера, ребёнок, финансы, будущее, интерес)"
+      scoring:
+        high: "Konkretes Problem/Anliegen"
+        medium: "Allgemeines Interesse"
+        low: "Nur neugierig/schaut sich um"
+
+    - name: experience_level
+      weight: 15
+      question_de: "Haben Sie schon einmal eine Numerologie-Beratung gemacht?"
+      question_ru: "Вы уже обращались к нумерологу?"
+      scoring:
+        high: "Ja, kennt Numerologie und will vertiefen"
+        medium: "Nein, aber sehr interessiert"
+        low: "Skeptisch / nur aus Spaß"
+
+    - name: budget_readiness
+      weight: 25
+      question_de: "Möchten Sie erstmal etwas Kleines ausprobieren oder direkt eine ausführliche Beratung?"
+      question_ru: "Хотите начать с чего-то небольшого или сразу полноценную консультацию?"
+      scoring:
+        high: "Direkt Beratung (€79-179)"
+        medium: "Erstmal Erstgespräch oder PDF (€9.99-19)"
+        low: "Nur kostenlos / kein Budget"
+
+    - name: timeline
+      weight: 20
+      question_de: "Wann würden Sie gerne starten?"
+      question_ru: "Когда бы вы хотели начать?"
+      scoring:
+        high: "Sofort / diese Woche"
+        medium: "In den nächsten Wochen"
+        low: "Kein konkreter Zeitplan"
+
+    - name: decision_authority
+      weight: 10
+      question_de: "Entscheiden Sie das selbst oder möchten Sie sich mit jemandem besprechen?"
+      question_ru: "Вы решаете сами или хотите посоветоваться с кем-то?"
+      scoring:
+        high: "Entscheide selbst"
+        medium: "Bespreche mit Partner"
+        low: "Muss erst überlegen"
+
+    - name: engagement
+      weight: 5
+      question_de: "(Intern bewertet: Wie engagiert ist der Anrufer im Gespräch?)"
+      question_ru: "(Внутренняя оценка: Насколько вовлечён звонящий в разговор?)"
+      scoring:
+        high: "Stellt viele Fragen, sehr interessiert"
+        medium: "Hört zu, fragt wenig"
+        low: "Einsilbig, scheint desinteressiert"
+
+  scoring:
+    grade_a: 70   # Hot: Sofort Erstgespräch buchen oder Paket empfehlen
+    grade_b: 40   # Warm: Erstgespräch oder PDF anbieten
+    # < 40         Cold: Website/Rechner empfehlen, kein Push

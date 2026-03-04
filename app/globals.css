@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+  :root {
+    --color-gold: #d4af37;
+    --color-gold-light: #F4D06F;
+    --color-dark-bg: #051a24;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-body font-sans text-white/90 antialiased;
+    background: linear-gradient(180deg, #0a2533 0%, #0e3040 15%, #0c2a3a 40%, #082030 70%, #051a24 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* Prevent iOS auto-zoom on input focus (triggers when font-size < 16px) */
+  @media screen and (max-width: 767px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Selection colors */
+  ::selection {
+    background: rgba(212, 175, 55, 0.3);
+    color: white;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #051a24;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.5);
+  }
+}
+
+@layer components {
+  /* Gold Gradient Button */
+  .btn-gold {
+    @apply inline-flex items-center justify-center px-8 py-3 rounded-pill font-bold uppercase tracking-wider text-sm
+           bg-gold-gradient text-teal-dark shadow-gold
+           hover:shadow-gold-hover hover:scale-[1.02]
+           active:scale-[0.98]
+           transition-all duration-200 cursor-pointer;
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-8 py-3 rounded-pill font-semibold text-sm
+           border-2 border-gold text-gold bg-transparent
+           hover:bg-gold/10 hover:shadow-gold
+           active:scale-[0.98]
+           transition-all duration-200 cursor-pointer;
+  }
+
+  /* Premium Card */
+  .card-premium {
+    @apply relative rounded-[16px] p-6 border border-gold/20
+           backdrop-blur-2xl shadow-card
+           hover:border-gold/40 hover:shadow-card-hover
+           transition-all duration-300 cursor-pointer;
+    background: rgba(13, 45, 66, 0.2);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply backdrop-blur-[20px] border border-white/10;
+    background: rgba(5, 26, 36, 0.85);
+  }
+
+  /* Section container */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Gold divider */
+  .divider-gold {
+    @apply w-20 h-[2px] bg-gold-gradient mx-auto;
+  }
+
+  /* Text styles */
+  .text-secondary {
+    @apply text-white/70;
+  }
+
+  .text-subtle {
+    @apply text-white/60;
+  }
+
+  /* Heading with gold accent */
+  .heading-gold {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-white;
+  }
+
+  .heading-gold span {
+    @apply text-gold;
+  }
+
+  /* Gold shimmer text effect */
+  .text-shimmer {
+    background: linear-gradient(90deg, #D4AF37 0%, #F4D06F 40%, #ECC558 50%, #F4D06F 60%, #D4AF37 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Pulse glow for CTA buttons */
+  .btn-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  /* Hover glow for consultation-style buttons */
+  .btn-hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+  .btn-hover-glow:hover {
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+  }
+}
+
+/* Global spin keyframe for mandala */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+@layer utilities {
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Thin gold scrollbar for content areas */
+  .thin-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .thin-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+  }
+  .thin-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 2px;
+  }
+  .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.5);
+  }
+  .thin-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 175, 55, 0.3) rgba(255, 255, 255, 0.05);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

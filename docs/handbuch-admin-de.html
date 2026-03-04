@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Numerologie PRO — Admin-Handbuch (Deutsch)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+  @page { margin: 0; size: A4; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    color: #2a2a3a;
+    line-height: 1.7;
+    font-size: 13px;
+  }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3d2066 0%, #2a1450 30%, #1a0a35 70%, #10062a 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 70px;
+    position: relative;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 45px;
+    height: 80px;
+    background: #c2185b;
+  }
+  .cover::after {
+    content: '\2726';
+    position: absolute;
+    top: 30px; left: 40px;
+    font-size: 60px;
+    color: #D4AF37;
+    opacity: 0.8;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    color: #fff;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .cover .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #e8d5f5;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+  .cover .meta {
+    font-size: 15px;
+    color: #D4AF37;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+  .cover .meta2 {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+  .cover .hashtag {
+    font-size: 14px;
+    color: #D4AF37;
+    margin-top: 60px;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  /* ── TOC PAGE ── */
+  .toc-page {
+    padding: 50px 60px;
+    page-break-after: always;
+    position: relative;
+    min-height: 100vh;
+  }
+  .toc-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #3d2066, #D4AF37);
+  }
+  .toc-page h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #3d2066;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e8d5f5;
+  }
+  .toc-page ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+  .toc-page ol li {
+    counter-increment: toc;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f0f7;
+    font-size: 15px;
+  }
+  .toc-page ol li a {
+    color: #2a2a3a;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  .toc-page ol li a::before {
+    content: counter(toc, decimal-leading-zero);
+    color: #D4AF37;
+    font-weight: 700;
+    font-size: 14px;
+    margin-right: 16px;
+    min-width: 28px;
+  }
+  .toc-page ol li a:hover { color: #3d2066; }
+
+  /* ── CONTENT PAGES ── */
+  .page {
+    padding: 0 60px 50px 60px;
+    page-break-inside: avoid;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .section-header {
+    background: linear-gradient(135deg, #3d2066 0%, #2a1450 100%);
+    margin: 0 -60px 25px -60px;
+    padding: 20px 60px;
+    position: relative;
+    page-break-after: avoid;
+  }
+  .section-header::after {
+    content: '\2726';
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    color: #D4AF37;
+    opacity: 0.4;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+  .section-header .page-url {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  h3 {
+    font-size: 15px;
+    color: #3d2066;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  p { margin-bottom: 10px; }
+
+  ul, ol { margin-left: 0; margin-bottom: 14px; padding-left: 20px; }
+  ul { list-style: none; padding-left: 0; }
+  ul li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+  }
+  ul li::before {
+    content: '\25B8';
+    color: #3d2066;
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+  ol li { margin-bottom: 6px; }
+
+  strong { color: #1a0a35; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 12.5px;
+  }
+  th {
+    background: linear-gradient(135deg, #3d2066, #2a1450);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #e8d5f5;
+    color: #2a2a3a;
+  }
+  tr:nth-child(even) td { background: #faf8fc; }
+
+  .tip {
+    background: linear-gradient(135deg, #f5f0ff 0%, #ede5f9 100%);
+    border-left: 4px solid #D4AF37;
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 12.5px;
+  }
+  .tip strong { color: #D4AF37; }
+
+  .warning {
+    background: linear-gradient(135deg, #fff8f0 0%, #fef0e0 100%);
+    border-left: 4px solid #c2185b;
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 12.5px;
+  }
+  .warning strong { color: #c2185b; }
+
+  code {
+    background: #f3eff8;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #3d2066;
+    font-family: 'Consolas', monospace;
+  }
+
+  a { color: #3d2066; }
+</style>
+</head>
+<body>
+
+<!-- DECKBLATT -->
+<div class="cover">
+  <h1>Numerologie PRO</h1>
+  <div class="subtitle">Admin-Handbuch</div>
+  <div class="meta">Vollständige Anleitung für das CRM-Backend</div>
+  <div class="meta2">24 Admin-Bereiche · Schritt für Schritt erklärt</div>
+  <div class="hashtag">#NUMEROLOGIEPRO</div>
+</div>
+
+<!-- INHALTSVERZEICHNIS -->
+<div class="toc-page">
+  <h1>Inhaltsverzeichnis</h1>
+  <ol>
+    <li><a href="#login">Anmeldung &amp; Zugang</a></li>
+    <li><a href="#dashboard">Dashboard (Übersicht)</a></li>
+    <li><a href="#inbox">Posteingang (Inbox)</a></li>
+    <li><a href="#analytics">Statistiken (Analytics)</a></li>
+    <li><a href="#pipeline">Pipeline (Kanban)</a></li>
+    <li><a href="#deals">Deals (Verkaufschancen)</a></li>
+    <li><a href="#kunden">Kunden (CRM)</a></li>
+    <li><a href="#kunden-detail">Kunden-Detailseite</a></li>
+    <li><a href="#leads">Leads</a></li>
+    <li><a href="#kontakte">Kontaktanfragen</a></li>
+    <li><a href="#bestellungen">Bestellungen</a></li>
+    <li><a href="#sitzungen">Sitzungen</a></li>
+    <li><a href="#kalender">Kalender</a></li>
+    <li><a href="#content">Content &amp; Broadcasts</a></li>
+    <li><a href="#sequenzen">E-Mail-Sequenzen</a></li>
+    <li><a href="#tags">Tags &amp; Auto-Tagging</a></li>
+    <li><a href="#automations">Automatisierungen</a></li>
+    <li><a href="#aufgaben">Aufgaben</a></li>
+    <li><a href="#bot">Telegram Bot-Builder</a></li>
+    <li><a href="#instagram">Instagram</a></li>
+    <li><a href="#custom-fields">Benutzerdefinierte Felder</a></li>
+    <li><a href="#team">Team &amp; Rollen</a></li>
+    <li><a href="#emails">E-Mail-Protokoll</a></li>
+    <li><a href="#gutscheine">Gutscheine</a></li>
+  </ol>
+</div>
+
+<!-- 1. ANMELDUNG -->
+<div class="page" id="login">
+  <div class="section-header">
+    <h2>1. Anmeldung &amp; Zugang</h2>
+  </div>
+  <p>Das Admin-Panel erreichst du unter: <code>numerologie-pro.com/de/admin</code></p>
+  <p>Du musst eingeloggt sein und dein Profil muss den Status <strong>„admin"</strong> haben. Falls du keinen Zugang hast, muss Danil deinen Account zum Admin machen.</p>
+  <div class="tip"><strong>Tipp:</strong> Links unten in der Seitenleiste findest du den Link „Kunden-Dashboard", um zur normalen Nutzeransicht zu wechseln.</div>
+</div>
+
+<!-- 2. DASHBOARD -->
+<div class="page" id="dashboard">
+  <div class="section-header">
+    <h2>2. Dashboard (Übersicht)</h2>
+    <div class="page-url">/admin</div>
+  </div>
+  <p>Die Startseite zeigt dir die wichtigsten Zahlen auf einen Blick:</p>
+  <ul>
+    <li><strong>4 KPI-Karten:</strong> Kunden gesamt, neue Anfragen, bezahlte Bestellungen, geplante Sitzungen</li>
+    <li><strong>Nächste Sitzungen:</strong> Die 5 anstehenden Termine mit Datum, Typ und Video-Link</li>
+    <li><strong>Offene Follow-Ups:</strong> CRM-Notizen, bei denen eine Nachverfolgung fällig ist (überfällige werden rot markiert)</li>
+    <li><strong>Letzte Kontaktanfragen:</strong> Die 5 neuesten Anfragen vom Kontaktformular</li>
+    <li><strong>Letzte Bestellungen:</strong> Die 5 neuesten Käufe</li>
+  </ul>
+  <div class="tip"><strong>Tipp:</strong> Klicke auf eine KPI-Karte, um direkt zum jeweiligen Bereich zu springen.</div>
+</div>
+
+<!-- 3. INBOX -->
+<div class="page" id="inbox">
+  <div class="section-header">
+    <h2>3. Posteingang (Inbox)</h2>
+    <div class="page-url">/admin/inbox</div>
+  </div>
+  <p>Hier laufen <strong>alle Kundenaktivitäten</strong> zusammen — E-Mails, Telegram-Nachrichten, Kontaktformulare, Bestellungen, Sitzungen, Notizen und Instagram-DMs.</p>
+  <h3>Filter-Tabs</h3>
+  <ul>
+    <li><strong>Alle</strong> — Alle Aktivitäten</li>
+    <li><strong>E-Mails</strong> — Gesendete und empfangene E-Mails</li>
+    <li><strong>Telegram</strong> — Telegram-Nachrichten</li>
+    <li><strong>Kontakte</strong> — Kontaktformular-Einträge</li>
+    <li><strong>Bestellungen</strong> — Käufe und Sitzungen</li>
+    <li><strong>Notizen</strong> — CRM-Notizen und Deal-Updates</li>
+    <li><strong>Instagram</strong> — Instagram-DMs und Lead Ads</li>
+  </ul>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>Klick auf einen Eintrag</strong> → Markiert ihn als gelesen und springt zum Kundenprofil</li>
+    <li><strong>„Alle gelesen"</strong> → Markiert alle Einträge im aktuellen Tab als gelesen</li>
+    <li><strong>„Mehr laden"</strong> → Weitere Einträge nachladen</li>
+  </ul>
+  <p>Ungelesene Einträge haben einen <strong>blauen Punkt</strong> und fettgedruckten Titel.</p>
+</div>
+
+<!-- 4. ANALYTICS -->
+<div class="page" id="analytics">
+  <div class="section-header">
+    <h2>4. Statistiken (Analytics)</h2>
+    <div class="page-url">/admin/analytics</div>
+  </div>
+  <p>Dein komplettes Business auf einer Seite — mit Grafiken und Zahlen.</p>
+  <h3>Zeitraum wählen</h3>
+  <p>Oben rechts kannst du den Zeitraum ändern: <strong>7 Tage, 30 Tage, 90 Tage, 12 Monate, Gesamt</strong>.</p>
+  <h3>Was wird angezeigt?</h3>
+  <table>
+    <tr><th>Bereich</th><th>Details</th></tr>
+    <tr><td>KPI-Übersicht</td><td>Umsatz, Bestellungen, Kunden, Sitzungen, Leads, Kontakte, Konversionsrate</td></tr>
+    <tr><td>Umsatz</td><td>Umsatz pro Tag (Diagramm) + Umsatz pro Produkt</td></tr>
+    <tr><td>Kunden</td><td>Wachstum pro Monat, Aufteilung nach Sprache (DE/RU), nach CRM-Status</td></tr>
+    <tr><td>Konversion</td><td>Trichter: Lead → Verifiziert → Kunde</td></tr>
+    <tr><td>Bestellungen</td><td>Pro Tag, nach Status, Top-Produkte</td></tr>
+    <tr><td>Sitzungen</td><td>Bezahlt vs. Kostenlos</td></tr>
+    <tr><td>Gutscheine</td><td>Nutzungsstatistik</td></tr>
+  </table>
+</div>
+
+<!-- 5. PIPELINE -->
+<div class="page" id="pipeline">
+  <div class="section-header">
+    <h2>5. Pipeline (Kanban-Board)</h2>
+    <div class="page-url">/admin/pipeline</div>
+  </div>
+  <p>Ein visuelles Board mit 4 Spalten, das deine Kunden nach Status zeigt:</p>
+  <table>
+    <tr><th>Spalte</th><th>Bedeutung</th></tr>
+    <tr><td>Lead</td><td>Neue Interessenten, die noch nichts gekauft haben</td></tr>
+    <tr><td>Kunde</td><td>Kunden mit mindestens einer Bestellung</td></tr>
+    <tr><td>VIP</td><td>Besonders wichtige Kunden (manuell oder automatisch gesetzt)</td></tr>
+    <tr><td>Inaktiv</td><td>Kunden ohne aktuelle Aktivität</td></tr>
+  </table>
+  <p>Jede Karte zeigt Name, E-Mail, Anzahl Bestellungen und Gesamtumsatz.</p>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>Kunden verschieben:</strong> Klicke die Pfeile auf einer Karte, um den Kunden in eine andere Spalte zu bewegen</li>
+    <li><strong>Kunden öffnen:</strong> Klicke auf den Namen → springt zur Detailseite</li>
+  </ul>
+</div>
+
+<!-- 6. DEALS -->
+<div class="page" id="deals">
+  <div class="section-header">
+    <h2>6. Deals (Verkaufschancen)</h2>
+    <div class="page-url">/admin/deals</div>
+  </div>
+  <p>Hier verfolgst du aktive Verkaufschancen in einer 6-stufigen Pipeline:</p>
+  <p><strong>Neu → Kontaktiert → Angebot → Verhandlung → Gewonnen → Verloren</strong></p>
+  <h3>Was zeigt jeder Deal?</h3>
+  <ul>
+    <li>Titel und Kundenname</li>
+    <li>Wert in Euro</li>
+    <li>Wahrscheinlichkeit (%)</li>
+    <li>Erwartetes Abschlussdatum</li>
+  </ul>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>„Neuer Deal"</strong> → Erstelle einen neuen Deal mit Titel, Kunden-E-Mail, Produkt, Wert und Abschlussdatum</li>
+    <li><strong>Pfeile links/rechts</strong> → Deal in die nächste/vorherige Stufe verschieben</li>
+    <li><strong>Bearbeiten</strong> (Stift-Icon) → Alle Felder ändern</li>
+    <li><strong>Löschen</strong> (Papierkorb-Icon) → Deal endgültig entfernen</li>
+  </ul>
+  <div class="tip"><strong>Tipp:</strong> Wenn du einen Deal nach „Verloren" verschiebst, wirst du nach dem Grund gefragt.</div>
+</div>
+
+<!-- 7. KUNDEN -->
+<div class="page" id="kunden">
+  <div class="section-header">
+    <h2>7. Kunden (CRM-Datenbank)</h2>
+    <div class="page-url">/admin/kunden</div>
+  </div>
+  <p>Die vollständige Liste aller registrierten Kunden.</p>
+  <h3>Spalten</h3>
+  <p>Name, E-Mail, Telefon, Sprache, CRM-Status, Tags, Quelle, Bestellungen, Sitzungen, Registrierungsdatum.</p>
+  <h3>Filter &amp; Suche</h3>
+  <ul>
+    <li><strong>Suchfeld:</strong> Suche nach Name, E-Mail, Telefon oder Tags</li>
+    <li><strong>CRM-Status-Filter:</strong> Lead / Kunde / VIP / Inaktiv</li>
+    <li><strong>Sprach-Filter:</strong> Deutsch / Russisch</li>
+  </ul>
+  <p>Klicke auf einen Kunden, um seine <strong>Detailseite</strong> zu öffnen.</p>
+</div>
+
+<!-- 8. KUNDEN-DETAIL -->
+<div class="page" id="kunden-detail">
+  <div class="section-header">
+    <h2>8. Kunden-Detailseite</h2>
+    <div class="page-url">/admin/kunden/[id]</div>
+  </div>
+  <p>Die <strong>360°-Ansicht</strong> eines einzelnen Kunden. Zwei Spalten:</p>
+  <h3>Linke Spalte — Profil</h3>
+  <ul>
+    <li>Name, E-Mail, Telefon, Geburtstag, Sprache, Telegram-ID</li>
+    <li>Tags (farbige Badges)</li>
+    <li>CRM-Status</li>
+    <li>Gesamtumsatz, Anzahl Bestellungen, Anzahl Sitzungen</li>
+  </ul>
+  <h3>Rechte Spalte — Aktivitäts-Timeline</h3>
+  <p>Chronologische Liste aller Interaktionen:</p>
+  <ul>
+    <li>CRM-Notizen (Notiz, Anruf, E-Mail, Follow-Up)</li>
+    <li>Gesendete E-Mails</li>
+    <li>Bestellungen</li>
+    <li>Sitzungen</li>
+    <li>Kontaktformular-Einträge</li>
+  </ul>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>Notiz erstellen:</strong> Wähle den Typ (Notiz/Anruf/E-Mail/Follow-Up), schreibe den Text und optional ein Follow-Up-Datum</li>
+    <li><strong>Status ändern:</strong> CRM-Status direkt auf der Seite ändern</li>
+  </ul>
+</div>
+
+<!-- 9. LEADS -->
+<div class="page" id="leads">
+  <div class="section-header">
+    <h2>9. Leads</h2>
+    <div class="page-url">/admin/leads</div>
+  </div>
+  <p>Alle Personen, die den <strong>Numerologie-Rechner</strong> benutzt und ihre E-Mail eingegeben haben.</p>
+  <h3>Statistik-Karten</h3>
+  <ul>
+    <li><strong>Gesamt:</strong> Alle erfassten Leads</li>
+    <li><strong>Verifiziert:</strong> E-Mail-Adresse bestätigt</li>
+    <li><strong>Konvertiert:</strong> Hat sich registriert oder gekauft</li>
+    <li><strong>Warm:</strong> Verifiziert, aber noch kein Kauf</li>
+  </ul>
+  <h3>Tabelle</h3>
+  <p>Zeigt E-Mail, Geburtsdatum, Quelle, Verifiziert-Status, Konvertiert-Status, Sprache und Datum.</p>
+  <div class="tip"><strong>Tipp:</strong> Leads werden automatisch vom Rechner erstellt. Du musst hier nichts manuell anlegen.</div>
+</div>
+
+<!-- 10. KONTAKTE -->
+<div class="page" id="kontakte">
+  <div class="section-header">
+    <h2>10. Kontaktanfragen</h2>
+    <div class="page-url">/admin/kontakte</div>
+  </div>
+  <p>Alle Nachrichten vom <strong>Kontaktformular</strong> der Website.</p>
+  <h3>Status-Verwaltung</h3>
+  <table>
+    <tr><th>Status</th><th>Farbe</th><th>Bedeutung</th></tr>
+    <tr><td>Neu</td><td>Gelb</td><td>Noch nicht gelesen</td></tr>
+    <tr><td>Gelesen</td><td>Blau</td><td>Gelesen, aber noch nicht beantwortet</td></tr>
+    <tr><td>Beantwortet</td><td>Grün</td><td>Antwort wurde gesendet</td></tr>
+    <tr><td>Archiviert</td><td>Grau</td><td>Erledigt und archiviert</td></tr>
+  </table>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>Status ändern:</strong> Klicke auf die Statusbuttons (Neu → Gelesen → Beantwortet → Archiviert)</li>
+    <li><strong>„Antworten":</strong> Öffnet dein E-Mail-Programm mit vorausgefülltem Betreff</li>
+  </ul>
+</div>
+
+<!-- 11. BESTELLUNGEN -->
+<div class="page" id="bestellungen">
+  <div class="section-header">
+    <h2>11. Bestellungen</h2>
+    <div class="page-url">/admin/bestellungen</div>
+  </div>
+  <p>Alle Stripe-Zahlungen auf einen Blick. Oben siehst du die <strong>Gesamtanzahl</strong> und den <strong>Gesamtumsatz</strong>.</p>
+  <h3>Tabelle</h3>
+  <p>Kundenname, E-Mail, Paket, Betrag (EUR), Status (Bezahlt/Ausstehend/Erstattet/Storniert), Datum.</p>
+  <div class="warning"><strong>Hinweis:</strong> Diese Seite ist nur zur Ansicht. Erstattungen und Stornierungen werden direkt über das Stripe Dashboard gemacht.</div>
+</div>
+
+<!-- 12. SITZUNGEN -->
+<div class="page" id="sitzungen">
+  <div class="section-header">
+    <h2>12. Sitzungen</h2>
+    <div class="page-url">/admin/sitzungen</div>
+  </div>
+  <p>Alle Beratungstermine (kostenlos und bezahlt).</p>
+  <h3>Filter-Tabs</h3>
+  <ul>
+    <li><strong>Alle</strong> — Alle Sitzungen</li>
+    <li><strong>Bezahlt</strong> — Nur bezahlte Beratungen</li>
+    <li><strong>Kostenlos</strong> — Kostenlose Erstgespräche</li>
+    <li><strong>Ohne Buchung</strong> — Bezahlt, aber noch kein Termin gebucht (Nachfassen!)</li>
+  </ul>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>Aufnahme anhängen:</strong> Bei abgeschlossenen Sitzungen kannst du einen Link zur Aufnahme hinzufügen</li>
+    <li><strong>Meeting-Link:</strong> Direkter Link zum Video-Call</li>
+  </ul>
+  <div class="warning"><strong>Wichtig:</strong> Der Tab „Ohne Buchung" zeigt dir Kunden, die bezahlt haben aber keinen Termin gebucht haben. Diese solltest du kontaktieren!</div>
+</div>
+
+<!-- 13. KALENDER -->
+<div class="page" id="kalender">
+  <div class="section-header">
+    <h2>13. Kalender</h2>
+    <div class="page-url">/admin/kalender</div>
+  </div>
+  <p>Visueller Kalender, der zwei Quellen kombiniert:</p>
+  <ol>
+    <li><strong>Google Calendar:</strong> Deine persönlichen Termine</li>
+    <li><strong>Sitzungen:</strong> Alle gebuchten Beratungstermine aus dem CRM</li>
+  </ol>
+  <h3>Farben</h3>
+  <ul>
+    <li><strong>Weiß:</strong> Persönliche Termine (Google Calendar)</li>
+    <li><strong>Lila:</strong> Kostenlose Sitzungen</li>
+    <li><strong>Gold:</strong> Bezahlte Sitzungen</li>
+  </ul>
+</div>
+
+<!-- 14. CONTENT -->
+<div class="page" id="content">
+  <div class="section-header">
+    <h2>14. Content &amp; Broadcasts</h2>
+    <div class="page-url">/admin/content</div>
+  </div>
+  <p>Erstelle und versende <strong>Newsletter und Telegram-Nachrichten</strong> an deine Kunden.</p>
+  <h3>Übersicht</h3>
+  <p>Liste aller Broadcasts mit Status: Entwurf, Geplant, Wird gesendet, Gesendet, Fehlgeschlagen.</p>
+  <h3>Neuen Broadcast erstellen</h3>
+  <ol>
+    <li><strong>Titel und Betreff</strong> eingeben</li>
+    <li><strong>KI-Assistent nutzen (optional):</strong> Wähle den Inhaltstyp (Newsletter, Telegram-Post, Upsell, Event, Tagestipp), die Sprache und das KI-Modell. Klicke „Mit KI generieren"</li>
+    <li><strong>Inhalt bearbeiten:</strong> Tab „E-Mail" für HTML-Inhalt, Tab „Telegram" für Text-Nachricht</li>
+    <li><strong>Einstellungen:</strong>
+      <ul>
+        <li>Kanal: E-Mail, Telegram oder Beides</li>
+        <li>Zielgruppe: Alle, VIP, Kunden, Leads oder nach Tags</li>
+        <li>Sprachfilter: Alle, nur Deutsch, nur Russisch</li>
+      </ul>
+    </li>
+    <li><strong>„Jetzt senden"</strong> — Versand mit Bestätigungsdialog (zeigt Empfängeranzahl)</li>
+  </ol>
+  <div class="tip"><strong>Tipp:</strong> Die Empfängeranzahl wird live angezeigt, wenn du die Zielgruppe änderst.</div>
+</div>
+
+<!-- 15. SEQUENZEN -->
+<div class="page" id="sequenzen">
+  <div class="section-header">
+    <h2>15. E-Mail-Sequenzen</h2>
+    <div class="page-url">/admin/sequenzen</div>
+  </div>
+  <p><strong>Automatische E-Mail-Serien</strong>, die bei bestimmten Ereignissen starten.</p>
+  <h3>Wie funktioniert es?</h3>
+  <ol>
+    <li>Du erstellst eine Sequenz mit einem <strong>Trigger</strong> (z.B. „Lead erstellt" oder „Bestellung abgeschlossen")</li>
+    <li>Du fügst <strong>Schritte</strong> hinzu — jeder Schritt ist eine E-Mail mit Verzögerung</li>
+    <li>Wenn der Trigger eintritt, wird der Kunde automatisch eingeschrieben und erhält die E-Mails nacheinander</li>
+  </ol>
+  <h3>Schritt-Einstellungen</h3>
+  <ul>
+    <li><strong>Verzögerung:</strong> Tage + Stunden nach dem vorherigen Schritt</li>
+    <li><strong>E-Mail-Betreff und Inhalt</strong></li>
+    <li><strong>Telegram (optional):</strong> Zusätzlich eine Telegram-Nachricht senden</li>
+  </ul>
+  <h3>Verfügbare Trigger</h3>
+  <p>Lead erstellt, Lead verifiziert, Profil erstellt, Bestellung abgeschlossen, Sitzung abgeschlossen, Tag hinzugefügt, Manuell.</p>
+  <div class="tip"><strong>Beispiel:</strong> Erstelle eine „Willkommen"-Sequenz mit Trigger „Lead erstellt": Schritt 1 sofort (Willkommens-E-Mail), Schritt 2 nach 3 Tagen (Numerologie-Tipps), Schritt 3 nach 7 Tagen (Angebot).</div>
+</div>
+
+<!-- 16. TAGS -->
+<div class="page" id="tags">
+  <div class="section-header">
+    <h2>16. Tags &amp; Auto-Tagging</h2>
+    <div class="page-url">/admin/tags</div>
+  </div>
+  <p>Erstelle <strong>Regeln</strong>, die automatisch Tags an Kundenprofile vergeben oder entfernen.</p>
+  <h3>Verfügbare Bedingungen</h3>
+  <table>
+    <tr><th>Bedingung</th><th>Beispiel</th></tr>
+    <tr><td>Bestellungen ≥ N</td><td>„VIP" wenn ≥ 3 Bestellungen</td></tr>
+    <tr><td>Umsatz ≥ N</td><td>„Premium" wenn ≥ 500€</td></tr>
+    <tr><td>Hat Produkt gekauft</td><td>„PDF-Käufer" wenn PDF gekauft</td></tr>
+    <tr><td>Inaktiv ≥ N Tage</td><td>„Inaktiv" wenn ≥ 90 Tage</td></tr>
+    <tr><td>Hat Telegram</td><td>„Telegram-User" wenn verbunden</td></tr>
+    <tr><td>Sprache ist</td><td>„Russian-Speaker" wenn Sprache = RU</td></tr>
+    <tr><td>Geburtsmonat ist</td><td>„Geburtstag-März" wenn Monat = 3</td></tr>
+  </table>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>„Neue Regel"</strong> → Tag-Name, Bedingung, Wert und optional „Auto-Entfernen" einstellen</li>
+    <li><strong>An/Aus-Schalter</strong> → Regel aktivieren oder deaktivieren</li>
+    <li><strong>„Jetzt ausführen"</strong> → Alle Regeln sofort auf alle Profile anwenden</li>
+  </ul>
+  <div class="tip"><strong>Tipp:</strong> Die Regeln werden auch automatisch jede Nacht um 3:00 Uhr ausgeführt.</div>
+</div>
+
+<!-- 17. AUTOMATIONS -->
+<div class="page" id="automations">
+  <div class="section-header">
+    <h2>17. Automatisierungen</h2>
+    <div class="page-url">/admin/automatisierung</div>
+  </div>
+  <p>Das mächtigste Feature im CRM: <strong>Wenn-Dann-Regeln</strong>, die automatisch Aktionen ausführen.</p>
+  <h3>Aufbau einer Regel</h3>
+  <ol>
+    <li><strong>Trigger (WENN):</strong> Das Ereignis, das die Regel auslöst</li>
+    <li><strong>Bedingungen (NUR WENN):</strong> Optional — zusätzliche Filter</li>
+    <li><strong>Aktionen (DANN):</strong> Was passieren soll</li>
+  </ol>
+  <h3>Verfügbare Trigger</h3>
+  <p>Lead erstellt, Lead verifiziert, Profil aktualisiert, Bestellung abgeschlossen, Bestellung erstattet, Sitzung geplant, Sitzung abgeschlossen, Tag hinzugefügt, Tag entfernt, Kontaktformular, CRM-Status geändert, Follow-Up fällig, Instagram-DM empfangen, Instagram-Lead.</p>
+  <h3>Verfügbare Aktionen</h3>
+  <table>
+    <tr><th>Aktion</th><th>Was passiert</th></tr>
+    <tr><td>Tag hinzufügen</td><td>Weist dem Kunden einen Tag zu</td></tr>
+    <tr><td>Tag entfernen</td><td>Entfernt einen Tag vom Kunden</td></tr>
+    <tr><td>Status ändern</td><td>Ändert den CRM-Status</td></tr>
+    <tr><td>E-Mail senden</td><td>Sendet eine E-Mail an den Kunden</td></tr>
+    <tr><td>Telegram senden</td><td>Sendet eine Telegram-Nachricht</td></tr>
+    <tr><td>Notiz erstellen</td><td>Erstellt eine CRM-Notiz</td></tr>
+    <tr><td>Aufgabe erstellen</td><td>Erstellt eine Aufgabe für dich</td></tr>
+    <tr><td>In Sequenz einschreiben</td><td>Startet eine E-Mail-Sequenz</td></tr>
+    <tr><td>Instagram-DM senden</td><td>Sendet eine Instagram-Direktnachricht</td></tr>
+  </table>
+  <div class="tip"><strong>Beispiel:</strong> WENN Bestellung abgeschlossen → NUR WENN Paket = pdf_analyse → DANN Tag „PDF-Käufer" hinzufügen + E-Mail „Danke" senden + Aufgabe „Follow-Up in 7 Tagen" erstellen.</div>
+  <h3>Ausführungsprotokoll</h3>
+  <p>Im Tab „Ausführungen" siehst du die letzten 30 Läufe mit Status (Erfolg/Teilweise/Fehlgeschlagen).</p>
+</div>
+
+<!-- 18. AUFGABEN -->
+<div class="page" id="aufgaben">
+  <div class="section-header">
+    <h2>18. Aufgaben</h2>
+    <div class="page-url">/admin/aufgaben</div>
+  </div>
+  <p>Deine <strong>To-Do-Liste</strong> im CRM.</p>
+  <h3>Aufgaben-Typen</h3>
+  <p>Follow-Up, Rückruf, Angebot senden, Bestellung prüfen, Sitzung vorbereiten, Material senden, Sonstiges.</p>
+  <h3>Prioritäten</h3>
+  <table>
+    <tr><th>Priorität</th><th>Farbe</th></tr>
+    <tr><td>Niedrig</td><td>Standard</td></tr>
+    <tr><td>Mittel</td><td>Blau</td></tr>
+    <tr><td>Hoch</td><td>Orange</td></tr>
+    <tr><td>Dringend</td><td>Rot</td></tr>
+  </table>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>„Neue Aufgabe"</strong> → Titel, Typ, Priorität und Fälligkeitsdatum eingeben</li>
+    <li><strong>Kreis-Button</strong> → Aufgabe als erledigt markieren</li>
+    <li><strong>Filter:</strong> Nach Status (Offen/In Bearbeitung/Erledigt) und Priorität</li>
+  </ul>
+  <div class="warning"><strong>Hinweis:</strong> Überfällige Aufgaben haben einen roten Rand. Heute fällige Aufgaben einen orangen Rand.</div>
+</div>
+
+<!-- 19. TELEGRAM BOT -->
+<div class="page" id="bot">
+  <div class="section-header">
+    <h2>19. Telegram Bot-Builder</h2>
+    <div class="page-url">/admin/bot-builder</div>
+  </div>
+  <p>Konfiguriere den <strong>Numerologie PRO Telegram-Bot</strong> mit 4 Bereichen:</p>
+  <h3>Tab 1 — Befehle</h3>
+  <p>Erstelle Bot-Befehle (z.B. /start, /hilfe). Jeder Befehl hat eine Antwort auf Deutsch und Russisch, optional mit Buttons (Links oder Callback-Aktionen).</p>
+  <h3>Tab 2 — FAQ-Regeln</h3>
+  <p>Automatische Antworten auf Stichworte. Beispiel: Wenn jemand „Preis" schreibt, antwortet der Bot automatisch mit der Preisliste.</p>
+  <h3>Tab 3 — Willkommen</h3>
+  <p>Die erste Nachricht, die ein neuer Nutzer erhält.</p>
+  <h3>Tab 4 — Einstellungen</h3>
+  <p>Allgemeine Bot-Konfiguration.</p>
+</div>
+
+<!-- 20. INSTAGRAM -->
+<div class="page" id="instagram">
+  <div class="section-header">
+    <h2>20. Instagram</h2>
+    <div class="page-url">/admin/instagram</div>
+  </div>
+  <p>Instagram-DMs direkt im Admin-Panel lesen und beantworten.</p>
+  <h3>Aufbau</h3>
+  <ul>
+    <li><strong>Links:</strong> Konversationsliste — alle Personen die dir geschrieben haben</li>
+    <li><strong>Rechts:</strong> Chat-Verlauf mit der ausgewählten Person</li>
+  </ul>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>Nachricht antworten:</strong> Textfeld unten, Enter zum Senden</li>
+    <li><strong>„Profil verknüpfen":</strong> Verbinde einen unbekannten Instagram-Absender mit einem Kundenprofil (E-Mail eingeben)</li>
+  </ul>
+  <div class="warning"><strong>Hinweis:</strong> Instagram muss erst eingerichtet werden (Meta Developer App). Bis dahin ist dieser Bereich leer.</div>
+</div>
+
+<!-- 21. CUSTOM FIELDS -->
+<div class="page" id="custom-fields">
+  <div class="section-header">
+    <h2>21. Benutzerdefinierte Felder</h2>
+    <div class="page-url">/admin/custom-fields</div>
+  </div>
+  <p>Erstelle <strong>eigene Felder</strong>, die auf jedem Kundenprofil erscheinen.</p>
+  <h3>Feld-Typen</h3>
+  <table>
+    <tr><th>Typ</th><th>Beschreibung</th></tr>
+    <tr><td>Text</td><td>Einzeiliges Textfeld</td></tr>
+    <tr><td>Zahl</td><td>Numerischer Wert</td></tr>
+    <tr><td>Datum</td><td>Datumsauswahl</td></tr>
+    <tr><td>Auswahl</td><td>Dropdown mit vordefinierten Optionen</td></tr>
+    <tr><td>Ja/Nein</td><td>Checkbox</td></tr>
+  </table>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>„Neues Feld"</strong> → Label (DE + RU), Feldschlüssel, Typ, Sortierung, Pflichtfeld-Option</li>
+    <li><strong>Vorschau:</strong> Zeigt dir live, wie das Feld auf dem Kundenprofil aussieht</li>
+    <li><strong>Reihenfolge ändern:</strong> Mit den Pfeilen die Felder sortieren</li>
+  </ul>
+  <div class="tip"><strong>Beispiel:</strong> Erstelle ein Feld „Lieblings-Chakra" (Typ: Auswahl) mit den Optionen: Wurzel, Sakral, Solar, Herz, Hals, Stirn, Krone.</div>
+</div>
+
+<!-- 22. TEAM -->
+<div class="page" id="team">
+  <div class="section-header">
+    <h2>22. Team &amp; Rollen</h2>
+    <div class="page-url">/admin/team</div>
+  </div>
+  <p>Verwalte, wer Zugang zum Admin-Panel hat und was sie sehen dürfen.</p>
+  <h3>Standard-Rollen</h3>
+  <table>
+    <tr><th>Rolle</th><th>Zugriff</th></tr>
+    <tr><td>Inhaber</td><td>Alles (kann nicht eingeschränkt werden)</td></tr>
+    <tr><td>Manager</td><td>Fast alles außer Team-Verwaltung</td></tr>
+    <tr><td>Assistent</td><td>Dashboard, Kunden, Leads, Kontakte, Sitzungen, Kalender, Aufgaben, Inbox</td></tr>
+    <tr><td>Betrachter</td><td>Nur Dashboard, Kunden und Analytics</td></tr>
+  </table>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>Rolle zuweisen:</strong> Wähle für jeden Admin-Account eine Rolle aus dem Dropdown</li>
+    <li><strong>„Neue Rolle"</strong> → Eigene Rolle mit individuellen Berechtigungen erstellen</li>
+    <li><strong>Berechtigungen bearbeiten:</strong> Checkbox-Raster für jede Rolle</li>
+  </ul>
+</div>
+
+<!-- 23. E-MAIL LOG -->
+<div class="page" id="emails">
+  <div class="section-header">
+    <h2>23. E-Mail-Protokoll</h2>
+    <div class="page-url">/admin/emails</div>
+  </div>
+  <p>Protokoll aller vom System versendeten E-Mails (letzte 200).</p>
+  <h3>Status-Symbole</h3>
+  <table>
+    <tr><th>Symbol</th><th>Bedeutung</th></tr>
+    <tr><td>✓ (blau)</td><td>Gesendet</td></tr>
+    <tr><td>✓ (grün)</td><td>Zugestellt</td></tr>
+    <tr><td>⚠ (orange)</td><td>Bounced (Adresse ungültig)</td></tr>
+    <tr><td>✗ (rot)</td><td>Fehlgeschlagen</td></tr>
+  </table>
+  <p>Diese Seite ist nur zur Ansicht — du kannst hier keine E-Mails senden.</p>
+</div>
+
+<!-- 24. GUTSCHEINE -->
+<div class="page" id="gutscheine">
+  <div class="section-header">
+    <h2>24. Gutscheine</h2>
+    <div class="page-url">/admin/gutscheine</div>
+  </div>
+  <p>Erstelle und verwalte <strong>Rabattcodes</strong> für den Shop.</p>
+  <h3>Felder beim Erstellen</h3>
+  <ul>
+    <li><strong>Code:</strong> Der Gutscheincode (wird automatisch in Großbuchstaben umgewandelt)</li>
+    <li><strong>Typ:</strong> Prozent (%) oder Fester Betrag (€)</li>
+    <li><strong>Wert:</strong> z.B. 15 (für 15% oder 15€)</li>
+    <li><strong>Max. Einlösungen:</strong> Leer = unbegrenzt</li>
+    <li><strong>Gültig von/bis:</strong> Zeitraum</li>
+    <li><strong>Gilt für:</strong> Alle Produkte / Nur PDF-Analyse / Nur Beratungspakete</li>
+    <li><strong>Stripe ID (optional):</strong> Für direkte Stripe-Checkout-Integration</li>
+  </ul>
+  <h3>Was kannst du tun?</h3>
+  <ul>
+    <li><strong>„Neuer Gutschein"</strong> → Erstellen</li>
+    <li><strong>Bearbeiten</strong> (Stift-Icon)</li>
+    <li><strong>Deaktivieren</strong> (Papierkorb-Icon) → Gutschein wird deaktiviert (nicht gelöscht)</li>
+    <li><strong>Code kopieren</strong> (Kopier-Icon) → In die Zwischenablage kopieren</li>
+  </ul>
+</div>
+
+</body>
+</html>

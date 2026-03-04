@@ -1,0 +1,93 @@
+{
+  "name": "Numerologie PRO — Geburtstags-Nachricht",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "cron-trigger",
+      "name": "Täglich 07:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.numerologie-pro.com/api/n8n/profile-lookup",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.CRON_SECRET}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ birthdate_today: true }) }}"
+      },
+      "id": "find-birthdays",
+      "name": "Geburtstagskinder finden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-items",
+      "name": "Pro Person",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $json.telegram_chat_id, text: ($json.language === 'ru' ? '🎂 <b>С Днём Рождения, ' + ($json.full_name?.split(' ')[0] ?? 'дорогой друг') + '!</b>\\n\\n✨ В этот особенный день звёзды и числа выстроились специально для тебя.\\n\\nНапиши /heute чтобы узнать свою персональную энергию на сегодня!\\n\\nСветлана желает тебе прекрасного дня! 💫' : '🎂 <b>Happy Birthday, ' + ($json.full_name?.split(' ')[0] ?? 'lieber Freund') + '!</b>\\n\\n✨ An diesem besonderen Tag stehen die Sterne und Zahlen speziell für dich.\\n\\nSchreibe /heute um deine persönliche Energie für heute zu erfahren!\\n\\nSwetlana wünscht dir einen wundervollen Tag! 💫'), parse_mode: 'HTML' }) }}"
+      },
+      "id": "send-birthday",
+      "name": "Geburtstags-Nachricht senden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 300]
+    }
+  ],
+  "connections": {
+    "Täglich 07:00": {
+      "main": [[{ "node": "Geburtstagskinder finden", "type": "main", "index": 0 }]]
+    },
+    "Geburtstagskinder finden": {
+      "main": [[{ "node": "Pro Person", "type": "main", "index": 0 }]]
+    },
+    "Pro Person": {
+      "main": [
+        [{ "node": "Geburtstags-Nachricht senden", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Geburtstags-Nachricht senden": {
+      "main": [[{ "node": "Pro Person", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [{ "name": "Numerologie PRO" }, { "name": "Telegram" }, { "name": "Birthday" }]
+}
